@@ -21,7 +21,8 @@ import {
   Ban,
   Edit,
   Eye,
-  Trash2
+  Trash2,
+  User
 } from "lucide-react";
 
 // Recharts for visualization
@@ -35,6 +36,7 @@ import {
   LineChart, 
   Line 
 } from "recharts";
+
 import { fetchCategoriesCount, fetchQuizzesCount, fetchUsersCount } from "../api/api";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
@@ -104,7 +106,6 @@ const quizActivityData = [
   { name: "Apr", quizzes: 700, completions: 550 },
   { name: "May", quizzes: 900, completions: 720 },
 ];
-
 export default function ModernDashboard() {
   const { data: session, status } = useSession({
     required: true,
@@ -205,53 +206,107 @@ export default function ModernDashboard() {
     <div className="flex h-screen bg-gray-50">
       {/* Sidebar */}
       <div className="w-64 bg-white border-r shadow-lg p-6 flex flex-col">
-        <div className="flex items-center mb-8">
-          <Avatar className="mr-4">
-            <AvatarImage 
-              src={session.user?.image || "/default-avatar.png"} 
-              alt="User avatar" 
-            />
-            <AvatarFallback>
-              {session.user?.name ? session.user.name.charAt(0) : 'U'}
-            </AvatarFallback>
-          </Avatar>
-          <div>
-            <h2 className="text-xl font-semibold">{session.user?.name || 'Admin'}</h2>
-            <p className="text-sm text-gray-500">Administrator</p>
-          </div>
+        <div className="mb-8">
+          <DropdownMenu>
+            <DropdownMenuTrigger className="w-full focus:outline-none">
+              <div className="flex items-center">
+                <Avatar className="mr-4">
+                  <AvatarImage
+                    src={session.user?.image || "/default-avatar.png"}
+                    alt="User avatar"
+                  />
+                  <AvatarFallback>
+                    {session.user?.name ? session.user.name.charAt(0) : "U"}
+                  </AvatarFallback>
+                </Avatar>
+                <div className="text-left">
+                  <h2 className="text-xl font-semibold">
+                    {session.user?.name || "Admin"}
+                  </h2>
+                  <p className="text-sm text-gray-500">Administrator</p>
+                </div>
+              </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56">
+              <DropdownMenuItem onClick={() => setActiveTab("profile")}>
+                <User className="mr-2 h-4 w-4" /> Profile
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setActiveTab("settings")}>
+                <Settings className="mr-2 h-4 w-4" /> Settings
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => signOut()}>
+                <LogOut className="mr-2 h-4 w-4" /> Sign out
+              </DropdownMenuItem>
+              <Button
+                variant="destructive"
+                className="w-full"
+                onClick={() => signOut()}
+              >
+                <LogOut className="mr-2 h-4 w-4" /> Sign Out
+              </Button>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
-       
 
-        <div className="mt-auto mb-6">
-          <Button 
-            variant="destructive" 
-            className="w-full"
-            onClick={() => signOut()}
+        {/* Navigation Menu */}
+        <nav className="space-y-1 flex-1">
+          <Button
+            variant={activeTab === "overview" ? "default" : "ghost"}
+            className="w-full justify-start"
+            onClick={() => setActiveTab("overview")}
           >
-            <LogOut className="mr-2 h-4 w-4" /> Sign Out
+            <Home className="mr-2 h-4 w-4" /> Dashboard
           </Button>
-        </div>
+
+          <Button
+            variant={activeTab === "analytics" ? "default" : "ghost"}
+            className="w-full justify-start"
+            onClick={() => setActiveTab("analytics")}
+          >
+            <BarChart2 className="mr-2 h-4 w-4" /> Analytics
+          </Button>
+
+          <Button
+            variant={activeTab === "users" ? "default" : "ghost"}
+            className="w-full justify-start"
+            onClick={() => setActiveTab("users")}
+          >
+            <Users className="mr-2 h-4 w-4" /> Users
+          </Button>
+
+          {/* CRUD Management Sections */}
+          <div className="pt-4">
+            <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 pl-2">
+              Content Management
+            </p>
+          </div>
+
+          <Button variant="ghost" className="w-full justify-start">
+            <Layers className="mr-2 h-4 w-4" /> Categories
+          </Button>
+
+          <Button variant="ghost" className="w-full justify-start">
+            <Activity className="mr-2 h-4 w-4" /> Quizzes
+          </Button>
+
+          <Button variant="ghost" className="w-full justify-start">
+            <TrendingUp className="mr-2 h-4 w-4" /> Questions
+          </Button>
+
+          <div className="pt-4">
+            <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 pl-2">
+              System
+            </p>
+          </div>
+
+          <Button variant="ghost" className="w-full justify-start">
+            <Settings className="mr-2 h-4 w-4" /> Settings
+          </Button>
+        </nav>
       </div>
 
       {/* Main Content */}
       <div className="flex-1 p-8 overflow-y-auto">
-      <Tabs 
-          defaultValue="overview" 
-          className="w-full"
-          onValueChange={(value) => setActiveTab(value)}
-        >
-          <TabsList className="grid w-full grid-cols-3 mb-4">
-            <TabsTrigger value="overview">
-              <Home className="mr-2 h-4 w-4" /> Overview
-            </TabsTrigger>
-            <TabsTrigger value="analytics">
-              <BarChart2 className="mr-2 h-4 w-4" /> Analytics
-            </TabsTrigger>
-            <TabsTrigger value="users">
-              <Users className="mr-2 h-4 w-4" /> Users
-            </TabsTrigger>
-          </TabsList>
-        </Tabs>
         {error && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
             <p>{error}</p>
@@ -261,38 +316,50 @@ export default function ModernDashboard() {
         {activeTab === "overview" && (
           <div>
             <h1 className="text-3xl font-bold mb-6">Dashboard Overview</h1>
-            
+
             <div className="grid grid-cols-3 gap-6">
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Total Users</CardTitle>
+                  <CardTitle className="text-sm font-medium">
+                    Total Users
+                  </CardTitle>
                   <Users className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">{userCount}</div>
-                  <p className="text-xs text-green-500">+20.1% from last month</p>
+                  <p className="text-xs text-green-500">
+                    +20.1% from last month
+                  </p>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Active Quizzes</CardTitle>
+                  <CardTitle className="text-sm font-medium">
+                    Active Quizzes
+                  </CardTitle>
                   <Activity className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">{quizCount}</div>
-                  <p className="text-xs text-green-500">+15.3% from last month</p>
+                  <p className="text-xs text-green-500">
+                    +15.3% from last month
+                  </p>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Categories</CardTitle>
+                  <CardTitle className="text-sm font-medium">
+                    Categories
+                  </CardTitle>
                   <Layers className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">{categoryCount}</div>
-                  <p className="text-xs text-green-500">+5.2% from last month</p>
+                  <p className="text-xs text-green-500">
+                    +5.2% from last month
+                  </p>
                 </CardContent>
               </Card>
             </div>
@@ -325,16 +392,16 @@ export default function ModernDashboard() {
                       <XAxis dataKey="name" />
                       <YAxis />
                       <Tooltip />
-                      <Line 
-                        type="monotone" 
-                        dataKey="quizzes" 
-                        stroke="#8884d8" 
+                      <Line
+                        type="monotone"
+                        dataKey="quizzes"
+                        stroke="#8884d8"
                         strokeWidth={2}
                       />
-                      <Line 
-                        type="monotone" 
-                        dataKey="completions" 
-                        stroke="#82ca9d" 
+                      <Line
+                        type="monotone"
+                        dataKey="completions"
+                        stroke="#82ca9d"
                         strokeWidth={2}
                       />
                     </LineChart>
@@ -347,43 +414,51 @@ export default function ModernDashboard() {
 
         {activeTab === "analytics" && (
           <div>
-          <h1 className="text-3xl font-bold mb-6">Detailed Analytics</h1>
-          
-          <div className="grid grid-cols-2 gap-6 mb-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>User Distribution</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-500">Cette section affichera la répartition des utilisateurs par rôle (user, admin, player).</p>
-              </CardContent>
-            </Card>
-            
-            <Card>
-              <CardHeader>
-                <CardTitle>Quiz par Catégorie</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-500">Cette section affichera le nombre de quiz par catégorie.</p>
-              </CardContent>
-            </Card>
-          </div>
+            <h1 className="text-3xl font-bold mb-6">Detailed Analytics</h1>
 
-          <Card>
+            <div className="grid grid-cols-2 gap-6 mb-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>User Distribution</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-500">
+                    Cette section affichera la répartition des utilisateurs par
+                    rôle (user, admin, player).
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Quiz par Catégorie</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-500">
+                    Cette section affichera le nombre de quiz par catégorie.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+
+            <Card>
               <CardHeader>
                 <CardTitle>Quiz par Difficulté</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-500">Cette section affichera le nombre de quiz par niveau de difficulté (easy, medium, hard).</p>
+                <p className="text-gray-500">
+                  Cette section affichera le nombre de quiz par niveau de
+                  difficulté (easy, medium, hard).
+                </p>
               </CardContent>
             </Card>
           </div>
         )}
 
-{activeTab === "users" && (
+        {activeTab === "users" && (
           <div>
             <h1 className="text-3xl font-bold mb-6">User Management</h1>
-            
+
             <Card>
               <CardHeader>
                 <CardTitle>Users List</CardTitle>
@@ -406,22 +481,30 @@ export default function ModernDashboard() {
                         <TableCell>
                           <div className="flex items-center">
                             <Avatar className="mr-3">
-                              <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
+                              <AvatarFallback>
+                                {user.name.charAt(0)}
+                              </AvatarFallback>
                             </Avatar>
                             {user.name}
                           </div>
                         </TableCell>
                         <TableCell>{user.email}</TableCell>
                         <TableCell>
-                          <Badge 
-                            variant={user.role === 'admin' ? 'default' : 'secondary'}
+                          <Badge
+                            variant={
+                              user.role === "admin" ? "default" : "secondary"
+                            }
                           >
                             {user.role}
                           </Badge>
                         </TableCell>
                         <TableCell>
-                          <Badge 
-                            variant={user.status === 'active' ? 'outline' : 'destructive'}
+                          <Badge
+                            variant={
+                              user.status === "active"
+                                ? "outline"
+                                : "destructive"
+                            }
                           >
                             {user.status}
                           </Badge>
@@ -435,24 +518,28 @@ export default function ModernDashboard() {
                               </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent>
-                              <DropdownMenuItem 
-                                onClick={() => handleUserAction('view', user)}
+                              <DropdownMenuItem
+                                onClick={() => handleUserAction("view", user)}
                               >
                                 <Eye className="mr-2 h-4 w-4" /> View Details
                               </DropdownMenuItem>
-                              <DropdownMenuItem 
-                                onClick={() => handleUserAction('edit', user)}
+                              <DropdownMenuItem
+                                onClick={() => handleUserAction("edit", user)}
                               >
                                 <Edit className="mr-2 h-4 w-4" /> Edit
                               </DropdownMenuItem>
-                              <DropdownMenuItem 
-                                onClick={() => handleUserAction('suspend', user)}
+                              <DropdownMenuItem
+                                onClick={() =>
+                                  handleUserAction("suspend", user)
+                                }
                               >
-                                <Ban className="mr-2 h-4 w-4" /> 
-                                {user.status === 'suspended' ? 'Activate' : 'Suspend'}
+                                <Ban className="mr-2 h-4 w-4" />
+                                {user.status === "suspended"
+                                  ? "Activate"
+                                  : "Suspend"}
                               </DropdownMenuItem>
-                              <DropdownMenuItem 
-                                onClick={() => handleUserAction('delete', user)}
+                              <DropdownMenuItem
+                                onClick={() => handleUserAction("delete", user)}
                                 className="text-red-600"
                               >
                                 <Trash2 className="mr-2 h-4 w-4" /> Delete
@@ -470,12 +557,16 @@ export default function ModernDashboard() {
         )}
 
         {/* User Details Dialog */}
-        <Dialog 
-          open={dialogType === 'view' || dialogType === 'edit' || dialogType === 'delete'} 
+        <Dialog
+          open={
+            dialogType === "view" ||
+            dialogType === "edit" ||
+            dialogType === "delete"
+          }
           onOpenChange={() => setDialogType(null)}
         >
           <DialogContent>
-            {dialogType === 'view' && selectedUser && (
+            {dialogType === "view" && selectedUser && (
               <>
                 <DialogHeader>
                   <DialogTitle>User Details</DialogTitle>
@@ -485,21 +576,36 @@ export default function ModernDashboard() {
                 </DialogHeader>
                 <div className="flex items-center space-x-4">
                   <Avatar className="h-16 w-16">
-                    <AvatarFallback>{selectedUser.name.charAt(0)}</AvatarFallback>
+                    <AvatarFallback>
+                      {selectedUser.name.charAt(0)}
+                    </AvatarFallback>
                   </Avatar>
                   <div>
-                    <p><strong>Name:</strong> {selectedUser.name}</p>
-                    <p><strong>Email:</strong> {selectedUser.email}</p>
-                    <p><strong>Role:</strong> {selectedUser.role}</p>
-                    <p><strong>Status:</strong> {selectedUser.status}</p>
-                    <p><strong>Registered:</strong> {selectedUser.registeredAt}</p>
-                    <p><strong>Quizzes Taken:</strong> {selectedUser.quizzesTaken}</p>
+                    <p>
+                      <strong>Name:</strong> {selectedUser.name}
+                    </p>
+                    <p>
+                      <strong>Email:</strong> {selectedUser.email}
+                    </p>
+                    <p>
+                      <strong>Role:</strong> {selectedUser.role}
+                    </p>
+                    <p>
+                      <strong>Status:</strong> {selectedUser.status}
+                    </p>
+                    <p>
+                      <strong>Registered:</strong> {selectedUser.registeredAt}
+                    </p>
+                    <p>
+                      <strong>Quizzes Taken:</strong>{" "}
+                      {selectedUser.quizzesTaken}
+                    </p>
                   </div>
                 </div>
               </>
             )}
 
-            {dialogType === 'delete' && selectedUser && (
+            {dialogType === "delete" && selectedUser && (
               <>
                 <DialogHeader>
                   <DialogTitle>Delete User</DialogTitle>
@@ -510,20 +616,15 @@ export default function ModernDashboard() {
                 <Alert variant="destructive">
                   <AlertTitle>Confirm Deletion</AlertTitle>
                   <AlertDescription>
-                    User {selectedUser.name} will be permanently removed from the system.
+                    User {selectedUser.name} will be permanently removed from
+                    the system.
                   </AlertDescription>
                 </Alert>
                 <div className="flex justify-end space-x-2">
-                  <Button 
-                    variant="outline" 
-                    onClick={() => setDialogType(null)}
-                  >
+                  <Button variant="outline" onClick={() => setDialogType(null)}>
                     Cancel
                   </Button>
-                  <Button 
-                    variant="destructive" 
-                    onClick={confirmDelete}
-                  >
+                  <Button variant="destructive" onClick={confirmDelete}>
                     Confirm Delete
                   </Button>
                 </div>

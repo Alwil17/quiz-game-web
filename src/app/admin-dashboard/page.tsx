@@ -35,6 +35,7 @@ import {
   LineChart, 
   Line 
 } from "recharts";
+
 import { fetchCategoriesCount, fetchQuizzesCount, fetchUsersCount } from "../api/api";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";

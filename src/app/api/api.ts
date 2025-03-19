@@ -52,6 +52,7 @@ api.interceptors.request.use(
         if (session?.user?.token) {
             config.headers.Authorization = `Bearer ${session.user.token}`;
         }
+        config.headers['X-Requested-With'] = 'XMLHttpRequest';
         return config;
     },
     (error) => {
@@ -79,25 +80,26 @@ axiosRetry(api, {
     retryCondition: (error) => error.response && error.response.status >= 500
   });
 
-// Fonctions pour récupérer les utilisateurs
+// Fetch Users Function
 export const fetchUsers = async () => {
     try {
         const response = await api.get('/users');
         console.log('Users API response:', response.data);
-        return Array.isArray(response.data) ? response.data.length : 0;
+        return Array.isArray(response.data);
     } catch (error) {
         console.error('Error fetching users:', error);
         return 0;
     }
 };
 
+// Function for retrieving users number
 export const fetchUsersCount = async () => {
     const response = await api.get('/users');
     console.log('Users API response:', response.data);
     return response.data.length;
 };
 
-// Fonctions pour récupérer les quiz
+// Fetch Quizzes Function 
 export const fetchQuizzes = async () => {
     try {
         const response = await api.get('/quizzes');
@@ -115,7 +117,7 @@ export const fetchQuizzesCount = async () => {
     return response.data.length;
 };
 
-// Fonction pour récupérer les catégories
+// Fetch Categories Function
 export const fetchCategoriesCount = async () => {
     try {
         const response = await api.get('/categories');

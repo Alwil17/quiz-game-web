@@ -7,6 +7,11 @@ import {
   Clock,
   Target,
   Users,
+  ChevronDown,
+  ChevronUp,
+  Calendar,
+  BookOpen,
+  Award,
 } from "lucide-react";
 import { DashboardShell } from "@/components/dashboard/dashboard-shell";
 import { DataTable } from "@/components/ui/data-table";
@@ -24,8 +29,27 @@ import {
 import { useToast } from "@/components/ui/use-toast";
 import { ColumnDef } from "@tanstack/react-table";
 import { GameSession } from "@/types/gameSession";
-import { gameSessionApi, usersApi } from "@/app/api/api";
+import { gameSessionApi, usersApi, quizzesApi } from "@/app/api/api";
 import { User } from "@/types/user";
+import { Quiz } from "@/types/quiz";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
+// Interface étendue pour les sessions enrichies avec le titre du quiz
+interface EnrichedGameSession extends GameSession {
+  quizTitle: string;
+}
 
 interface PlayerStats {
   userId: number;
@@ -35,7 +59,7 @@ interface PlayerStats {
   averageScore: number;
   bestScore: number;
   lastPlayed: string;
-  sessions: GameSession[];
+  sessions: EnrichedGameSession[];
 }
 
 export default function GameSessionPage() {
@@ -43,19 +67,26 @@ export default function GameSessionPage() {
   const [loading, setLoading] = useState(true);
   const [playerStats, setPlayerStats] = useState<PlayerStats[]>([]);
   const [users, setUsers] = useState<User[]>([]);
+  const [quizzes, setQuizzes] = useState<Quiz[]>([]);
+  const [selectedPlayer, setSelectedPlayer] = useState<PlayerStats | null>(null);
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Récupérer les sessions et les utilisateurs en parallèle
-        const [sessionsResponse, usersResponse] = await Promise.all([
+        // Récupérer les sessions, utilisateurs et quiz en parallèle
+        const [sessionsResponse, usersResponse, quizzesResponse] = await Promise.all([
           gameSessionApi.getAll(),
           usersApi.getAll(),
+          quizzesApi.getAll(),
         ]);
 
         const sessions = sessionsResponse.data;
         const users = usersResponse.data;
+        const quizzes = quizzesResponse.data;
+        
         setUsers(users);
+        setQuizzes(quizzes);
 
         // Grouper les sessions par joueur
         const statsByPlayer = sessions.reduce((acc: { [key: number]: PlayerStats }, session) => {
@@ -75,7 +106,14 @@ export default function GameSessionPage() {
 
           acc[userId].totalGames++;
           acc[userId].totalScore += session.score;
-          acc[userId].sessions.push(session);
+          
+          // Enrichir la session avec le titre du quiz
+          const enrichedSession: EnrichedGameSession = {
+            ...session,
+            quizTitle: quizzes.find(q => q.id === session.quizId)?.title || "Quiz inconnu"
+          };
+          
+          acc[userId].sessions.push(enrichedSession);
           
           // Mettre à jour le meilleur score
           if (session.score > acc[userId].bestScore) {
@@ -96,6 +134,10 @@ export default function GameSessionPage() {
         const statsArray = Object.values(statsByPlayer).map(stats => ({
           ...stats,
           averageScore: stats.totalScore / stats.totalGames,
+          // Trier les sessions par date (plus récente en premier)
+          sessions: stats.sessions.sort((a, b) => 
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          )
         }));
 
         // Trier par score moyen décroissant
@@ -116,6 +158,22 @@ export default function GameSessionPage() {
     fetchData();
   }, [toast]);
 
+  const formatDateTime = (dateString: string) => {
+    const date = new Date(dateString);
+    return new Intl.DateTimeFormat('fr-FR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    }).format(date);
+  };
+
+  const showPlayerDetails = (player: PlayerStats) => {
+    setSelectedPlayer(player);
+    setIsDetailsOpen(true);
+  };
+
   const columns: ColumnDef<PlayerStats>[] = [
     {
       accessorKey: "position",
@@ -132,6 +190,15 @@ export default function GameSessionPage() {
     {
       accessorKey: "username",
       header: "Joueur",
+      cell: ({ row }) => (
+        <Button 
+          variant="link" 
+          onClick={() => showPlayerDetails(row.original)}
+          className="p-0 h-auto font-medium text-blue-600 hover:underline"
+        >
+          {row.original.username}
+        </Button>
+      ),
     },
     {
       accessorKey: "totalGames",
@@ -150,6 +217,18 @@ export default function GameSessionPage() {
       accessorKey: "lastPlayed",
       header: "Dernière partie",
       cell: ({ row }) => new Date(row.original.lastPlayed).toLocaleDateString(),
+    },
+    {
+      id: "actions",
+      cell: ({ row }) => (
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => showPlayerDetails(row.original)}
+        >
+          Détails
+        </Button>
+      ),
     },
   ];
 
@@ -228,6 +307,153 @@ export default function GameSessionPage() {
           )}
         </CardContent>
       </Card>
+
+      {/* Dialogue des détails des sessions d'un joueur */}
+      <Dialog open={isDetailsOpen} onOpenChange={setIsDetailsOpen}>
+        <DialogContent className="max-w-4xl">
+          <DialogHeader>
+            <DialogTitle className="text-xl flex items-center">
+              <UserIcon className="mr-2 h-5 w-5" /> 
+              Sessions de {selectedPlayer?.username}
+            </DialogTitle>
+          </DialogHeader>
+          
+          {selectedPlayer && (
+            <div className="space-y-6">
+              {/* Carte de résumé */}
+              <div className="grid gap-4 md:grid-cols-4">
+                <Card>
+                  <CardHeader className="py-2">
+                    <CardTitle className="text-sm">Sessions</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-xl font-bold">{selectedPlayer.totalGames}</div>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardHeader className="py-2">
+                    <CardTitle className="text-sm">Score moyen</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-xl font-bold">{Math.round(selectedPlayer.averageScore)}</div>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardHeader className="py-2">
+                    <CardTitle className="text-sm">Meilleur score</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-xl font-bold">{selectedPlayer.bestScore}</div>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardHeader className="py-2">
+                    <CardTitle className="text-sm">Total points</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-xl font-bold">{selectedPlayer.totalScore}</div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Liste des sessions */}
+              <div className="border rounded-md">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Date</TableHead>
+                      <TableHead>Quiz</TableHead>
+                      <TableHead>Score</TableHead>
+                      <TableHead className="w-[100px]">Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {selectedPlayer.sessions.length === 0 ? (
+                      <TableRow>
+                        <TableCell colSpan={4} className="text-center">
+                          Aucune session trouvée
+                        </TableCell>
+                      </TableRow>
+                    ) : (
+                      selectedPlayer.sessions.map((session) => (
+                        <TableRow key={session.id}>
+                          <TableCell>
+                            <div className="flex flex-col">
+                              <span className="font-medium">{formatDateTime(session.createdAt)}</span>
+                              <span className="text-xs text-gray-500">ID: {session.id}</span>
+                            </div>
+                          </TableCell>
+                          <TableCell>{session.quizTitle}</TableCell>
+                          <TableCell>
+                            <Badge variant={session.score === selectedPlayer.bestScore ? "default" : "outline"}>
+                              {session.score} pts
+                            </Badge>
+                          </TableCell>
+                          <TableCell>
+                            <Button variant="ghost" size="sm">
+                              Détails
+                            </Button>
+                          </TableCell>
+                        </TableRow>
+                      ))
+                    )}
+                  </TableBody>
+                </Table>
+              </div>
+              
+              {/* Statistiques sur les 5 dernières sessions */}
+              {selectedPlayer.sessions.length >= 5 && (
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-md">Évolution récente</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-1">
+                      {selectedPlayer.sessions.slice(0, 5).map((session, index) => (
+                        <div key={session.id} className="flex items-center justify-between">
+                          <div className="flex items-center space-x-2">
+                            <span className="text-sm text-gray-500">
+                              {new Date(session.createdAt).toLocaleDateString()}
+                            </span>
+                            <span className="text-sm font-medium truncate max-w-[200px]">
+                              {session.quizTitle}
+                            </span>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <span className="font-medium">{session.score} pts</span>
+                            {index > 0 && (
+                              <Badge variant={
+                                session.score > selectedPlayer.sessions[index - 1].score 
+                                  ? "default" 
+                                  : session.score < selectedPlayer.sessions[index - 1].score 
+                                    ? "destructive" 
+                                    : "outline"
+                              }>
+                                {session.score > selectedPlayer.sessions[index - 1].score 
+                                  ? "+" + (session.score - selectedPlayer.sessions[index - 1].score)
+                                  : session.score < selectedPlayer.sessions[index - 1].score 
+                                    ? (session.score - selectedPlayer.sessions[index - 1].score)
+                                    : "="
+                                }
+                              </Badge>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+            </div>
+          )}
+          
+          <DialogFooter>
+            <Button onClick={() => setIsDetailsOpen(false)}>
+              Fermer
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </DashboardShell>
   );
 }

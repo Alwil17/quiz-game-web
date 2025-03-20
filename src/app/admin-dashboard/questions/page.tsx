@@ -19,7 +19,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-} from "@radix-ui/react-dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal, Edit, Trash2, Plus } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -187,14 +187,17 @@ export default function QuestionPage() {
   const handleDeleteQuestion = async () => {
     if (!selectedQuestion) return;
     try {
+      console.log("Suppression de la question ID:", selectedQuestion.id);
       await deleteQuestion(selectedQuestion.id);
       setIsDeleting(false);
       toast({
         title: "Question supprimée",
         description: "La question a été supprimée avec succès",
       });
-      fetchQuestions();
+      await fetchQuestions();
+      setSelectedQuestion(null);
     } catch (err) {
+      console.error("Erreur lors de la suppression:", err);
       toast({
         title: "Erreur",
         description: "Impossible de supprimer la question",
@@ -383,7 +386,7 @@ export default function QuestionPage() {
                   </SelectTrigger>
                   <SelectContent>
                     {newQuestion.options.map((option, index) => (
-                      <SelectItem key={index} value={option}>
+                      <SelectItem key={index} value={option || `option_${index + 1}`}>
                         {option || `Option ${index + 1}`}
                       </SelectItem>
                     ))}
@@ -513,7 +516,7 @@ export default function QuestionPage() {
                     </SelectTrigger>
                     <SelectContent>
                       {selectedQuestion.options.map((option, index) => (
-                        <SelectItem key={index} value={option}>
+                        <SelectItem key={index} value={option || `option_${index + 1}`}>
                           {option || `Option ${index + 1}`}
                         </SelectItem>
                       ))}

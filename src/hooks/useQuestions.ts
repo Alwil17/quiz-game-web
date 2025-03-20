@@ -73,10 +73,18 @@ export const useQuestions = () => {
     setLoading(true);
     setError(null);
     try {
-      await questionsApi.delete(id);
-      setQuestions(questions.filter((q) => q.id !== id));
+      console.log(`Tentative de suppression de la question ID: ${id}`);
+      const response = await questionsApi.delete(id);
+      console.log("Réponse de l'API:", response);
+      
+      // Mettre à jour l'état des questions en supprimant celle avec l'ID correspondant
+      setQuestions(prevQuestions => prevQuestions.filter(q => q.id !== id));
+      
+      return true;
     } catch (err) {
+      console.error(`Erreur lors de la suppression de la question ID: ${id}`, err);
       setError(`Failed to delete question with ID: ${id}`);
+      throw err; // Propager l'erreur pour la gestion dans le composant
     } finally {
       setLoading(false);
     }

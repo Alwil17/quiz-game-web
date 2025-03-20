@@ -181,8 +181,10 @@ export const questionsApi = {
     data: UpdateQuestionDto
   ): Promise<AxiosResponse<Question>> => api.patch(`/questions/${id}`, data),
 
-  delete: (id: number): Promise<AxiosResponse<void>> =>
-    api.delete(`/questions/${id}`),
+  delete: (id: number): Promise<AxiosResponse<void>> => {
+    console.log("API call: delete question with ID:", id);
+    return api.delete(`/questions/${id}`);
+  },
 
   getPerQuiz: (quizId: number): Promise<AxiosResponse<Question[]>> =>
     api.get(`/quizzes/${quizId}/questions`),

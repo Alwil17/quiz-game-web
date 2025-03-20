@@ -83,7 +83,7 @@ export const useQuestions = () => {
   };
 
   // bulk create questions
-  const createQuestionsBulk = async (questionsDto: QuestionBulkDto[]) => {
+  const bulkCreateQuestions = async (questionsDto: QuestionBulkDto) => {
     setLoading(true);
     setError(null);
     try {
@@ -107,5 +107,6 @@ export const useQuestions = () => {
     createQuestion,
     updateQuestion,
     deleteQuestion,
+    bulkCreateQuestions,
   };
 };

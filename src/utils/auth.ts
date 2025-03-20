@@ -5,7 +5,7 @@ export const isAuthenticated = (session: UserSession | null): boolean => {
 };
 
 export const isAdmin = (session: UserSession | null): boolean => {
-    return session?.user?.role === 'owner';
+    return session?.user?.role === 'admin';
 };
 
 export const getAuthToken = (session: UserSession | null): string | null => {

@@ -1,33 +1,50 @@
 import { AnswerBulkDTO } from "./answer";
 import { QuizDifficulty } from "./quiz";
 
-export type QuestionType = "MTC" | "True/False";
+export enum QuestionType {
+  MULTIPLE_CHOICE = "MULTIPLE_CHOICE",
+  TRUE_FALSE = "TRUE_FALSE",
+}
+
 export interface Question {
   id: number;
-  quizId: number;
+  quizId: string;
   text: string;
   type: QuestionType;
-  level?: QuizDifficulty;
-  createdAt: string;
-  updatedAt: string;
+  options: string[];
+  correctAnswer: string;
+  points: number;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface CreateQuestionDto {
-  quizId: number;
+  quizId: string;
   text: string;
   type: QuestionType;
-  level?: QuizDifficulty;
+  options: string[];
+  correctAnswer: string;
+  points: number;
 }
 
 export interface UpdateQuestionDto {
+  text?: string;
+  type?: QuestionType;
+  options?: string[];
+  correctAnswer?: string;
+  points?: number;
+}
+
+export interface QuestionBulkItem {
   text: string;
   type: QuestionType;
-  level?: QuizDifficulty;
+  options: string[];
+  correctAnswer: string;
+  quizId: string;
+  points: number;
 }
 
 export interface QuestionBulkDto {
-  text: string;
-  type: QuestionType;
-  level?: QuizDifficulty;
-  answers: AnswerBulkDTO[];
+  questions: QuestionBulkItem[];
+  quizId: string;
 }

@@ -16,6 +16,7 @@ import {
   Settings,
   HelpCircle,
   Users,
+  Activity,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -48,6 +49,11 @@ export function DashboardShell({ children }: DashboardShellProps) {
       title: "Statistiques",
       href: "/admin-dashboard/stats",
       icon: BarChart2,
+    },
+    {
+      title: "Sessions",
+      href: "/admin-dashboard/sessions",
+      icon: Activity,
     },
     {
       title: "Utilisateurs",

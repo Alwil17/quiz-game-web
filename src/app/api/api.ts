@@ -188,7 +188,7 @@ export const questionsApi = {
     api.get(`/quizzes/${quizId}/questions`),
 
   // bulk Questions
-  createBulk: (data: QuestionBulkDto[]): Promise<AxiosResponse<Question[]>> =>
+  createBulk: (data: QuestionBulkDto): Promise<AxiosResponse<Question[]>> =>
     api.post(`/questions/bulk`, data)
 };
 

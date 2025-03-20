@@ -47,21 +47,21 @@ import { ColumnDef } from "@tanstack/react-table";
 // Mock data to use if API fails
 const mockUsers: User[] = [
   {
-    id: "1",
+    id: 1,
     name: "John Doe",
     email: "john@example.com",
     role: "admin",
     createdAt: new Date().toISOString(),
   },
   {
-    id: "2",
+    id: 2,
     name: "Jane Smith",
     email: "jane@example.com",
     role: "user",
     createdAt: new Date().toISOString(),
   },
   {
-    id: "3",
+    id: 3,
     name: "Michael Brown",
     email: "michael@example.com",
     role: "player",
@@ -100,7 +100,7 @@ export default function UsersPage() {
         title: "Utilisation de données factices",
         description:
           "Impossible de récupérer les données. Utilisation de données factices.",
-        variant: "warning",
+        variant: "destructive",
       });
     });
   }, []);
@@ -335,20 +335,20 @@ export default function UsersPage() {
                 searchColumn="name"
                 searchPlaceholder="Rechercher un utilisateur..."
 
-<!--             {loading ? (
-              <div className="flex justify-center py-10">
-                <div className="h-10 w-10 animate-spin rounded-full border-2 border-primary border-r-transparent"></div>
-              </div>
-            ) : error ? (
-              <div className="py-10 text-center text-red-500">
-                Une erreur est survenue lors du chargement des utilisateurs.
-              </div>
-            ) : (
-              <DataTable 
-                columns={columns} 
-                data={users} 
-                searchColumn="name"
-                searchPlaceholder="Rechercher un utilisateur..."  -->
+// <!--             {loading ? (
+//               <div className="flex justify-center py-10">
+//                 <div className="h-10 w-10 animate-spin rounded-full border-2 border-primary border-r-transparent"></div>
+//               </div>
+//             ) : error ? (
+//               <div className="py-10 text-center text-red-500">
+//                 Une erreur est survenue lors du chargement des utilisateurs.
+//               </div>
+//             ) : (
+//               <DataTable 
+//                 columns={columns} 
+//                 data={users} 
+//                 searchColumn="name"
+//                 searchPlaceholder="Rechercher un utilisateur..."  -->
 
               />
             )}

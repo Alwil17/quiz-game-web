@@ -51,13 +51,57 @@ export default function AdminDashboard() {
   }, []);
 
   return (
+    <div className="flex h-screen bg-gray-50">
+      {/* Sidebar */}
+      <div className="w-64 bg-white border-r shadow-lg p-6 flex flex-col">
+        <div className="mb-8">
+          <DropdownMenu>
+            <DropdownMenuTrigger className="w-full focus:outline-none">
+              <div className="flex items-center">
+                <Avatar className="mr-4">
+                  <AvatarImage
+                    src={session.user?.image || "/default-avatar.png"}
+                    alt="User avatar"
+                  />
+                  <AvatarFallback>
+                    {session.user?.name ? session.user.name.charAt(0) : "U"}
+                  </AvatarFallback>
+                </Avatar>
+                <div className="text-left">
+                  <h2 className="text-xl font-semibold">
+                    {session.user?.name || "Admin"}
+                  </h2>
+                  <p className="text-sm text-gray-500">Administrator</p>
+                </div>
+              </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56">
+              <DropdownMenuItem onClick={() => setActiveTab("profile")}>
+                <User className="mr-2 h-4 w-4" /> Profile
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setActiveTab("settings")}>
+                <Settings className="mr-2 h-4 w-4" /> Settings
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => signOut()}>
+                <LogOut className="mr-2 h-4 w-4" /> Sign out
+              </DropdownMenuItem>
+              <Button
+                variant="destructive"
+                className="w-full"
+                onClick={() => signOut()}
+              >
+                <LogOut className="mr-2 h-4 w-4" /> Sign Out
+              </Button>
+            </DropdownMenuContent>
+          </DropdownMenu>
     <DashboardShell>
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-2">
-          <h1 className="text-3xl font-bold">Tableau de bord</h1>
+          <h1 className="text-3xl font-bold">Dashboard</h1>
           <p className="text-muted-foreground">
             Bienvenue, {session?.user?.name || "Administrateur"}! Voici un aperçu des statistiques de votre plateforme.
           </p>
+
         </div>
 
         <Tabs defaultValue="overview" className="space-y-4" onValueChange={setActiveTab}>

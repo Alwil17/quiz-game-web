@@ -138,6 +138,7 @@ export default function UsersPage() {
         setDisplayedUsers([...mockUsers]);
       } else {
         await createUser(formData as CreateUserDto);
+        await fetchUsers(); // Rafraîchir la liste après création
       }
       toast({
         title: "Utilisateur créé",
@@ -146,6 +147,7 @@ export default function UsersPage() {
       setIsCreating(false);
       resetForm();
     } catch (error) {
+      console.error("Erreur création utilisateur:", error);
       toast({
         title: "Erreur",
         description:
@@ -168,6 +170,7 @@ export default function UsersPage() {
         }
       } else {
         await updateUser(selectedUser.id, formData);
+        await fetchUsers(); // Rafraîchir la liste après mise à jour
       }
 
       toast({
@@ -177,6 +180,7 @@ export default function UsersPage() {
       setIsEditing(false);
       resetForm();
     } catch (error) {
+      console.error("Erreur mise à jour utilisateur:", error);
       toast({
         title: "Erreur",
         description:
@@ -190,7 +194,18 @@ export default function UsersPage() {
     if (!selectedUser) return;
 
     try {
-      await deleteUser(selectedUser.id);
+      if (useMockData) {
+        // Delete from mock data
+        const index = mockUsers.findIndex((u) => u.id === selectedUser.id);
+        if (index !== -1) {
+          mockUsers.splice(index, 1);
+          setDisplayedUsers([...mockUsers]);
+        }
+      } else {
+        await deleteUser(selectedUser.id);
+        await fetchUsers(); // Rafraîchir la liste après suppression
+      }
+      
       toast({
         title: "Utilisateur supprimé",
         description: "L'utilisateur a été supprimé avec succès.",
@@ -198,6 +213,7 @@ export default function UsersPage() {
       setIsDeleting(false);
       setSelectedUser(null);
     } catch (error) {
+      console.error("Erreur suppression utilisateur:", error);
       toast({
         title: "Erreur",
         description:
@@ -328,21 +344,6 @@ export default function UsersPage() {
                 data={displayedUsers}
                 searchColumn="name"
                 searchPlaceholder="Rechercher un utilisateur..."
-
-                // <!--             {loading ? (
-                //               <div className="flex justify-center py-10">
-                //                 <div className="h-10 w-10 animate-spin rounded-full border-2 border-primary border-r-transparent"></div>
-                //               </div>
-                //             ) : error ? (
-                //               <div className="py-10 text-center text-red-500">
-                //                 Une erreur est survenue lors du chargement des utilisateurs.
-                //               </div>
-                //             ) : (
-                //               <DataTable
-                //                 columns={columns}
-                //                 data={users}
-                //                 searchColumn="name"
-                //                 searchPlaceholder="Rechercher un utilisateur..."  -->
               />
             )}
           </CardContent>
@@ -417,7 +418,10 @@ export default function UsersPage() {
       </Dialog>
 
       {/* Dialogue d'édition d'utilisateur */}
-      <Dialog open={isEditing} onOpenChange={setIsEditing}>
+      <Dialog open={isEditing} onOpenChange={(open) => {
+        setIsEditing(open);
+        if (!open) resetForm();
+      }}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Modifier l'utilisateur</DialogTitle>
@@ -450,7 +454,7 @@ export default function UsersPage() {
                 value={formData.role || "user"}
                 onValueChange={(value) => handleSelectChange("role", value)}
               >
-                <SelectTrigger>
+                <SelectTrigger id="edit-role">
                   <SelectValue placeholder="Sélectionner un rôle" />
                 </SelectTrigger>
                 <SelectContent>
@@ -464,16 +468,22 @@ export default function UsersPage() {
             </div>
           </div>
           <DialogFooter>
-            <DialogClose asChild>
-              <Button variant="outline">Annuler</Button>
-            </DialogClose>
+            <Button variant="outline" onClick={() => {
+              setIsEditing(false);
+              resetForm();
+            }}>
+              Annuler
+            </Button>
             <Button onClick={handleUpdate}>Enregistrer</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
 
       {/* Dialogue de suppression d'utilisateur */}
-      <Dialog open={isDeleting} onOpenChange={setIsDeleting}>
+      <Dialog open={isDeleting} onOpenChange={(open) => {
+        setIsDeleting(open);
+        if (!open) setSelectedUser(null);
+      }}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Supprimer l'utilisateur</DialogTitle>
@@ -485,9 +495,9 @@ export default function UsersPage() {
             </p>
           </div>
           <DialogFooter>
-            <DialogClose asChild>
-              <Button variant="outline">Annuler</Button>
-            </DialogClose>
+            <Button variant="outline" onClick={() => setIsDeleting(false)}>
+              Annuler
+            </Button>
             <Button variant="destructive" onClick={handleDelete}>
               Supprimer
             </Button>

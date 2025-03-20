@@ -203,6 +203,7 @@ export default function ModernDashboard() {
   if (!session) return null;
 
   return (
+<<<<<<< Updated upstream
     <div className="flex h-screen bg-gray-50">
       {/* Sidebar */}
       <div className="w-64 bg-white border-r shadow-lg p-6 flex flex-col">
@@ -246,6 +247,15 @@ export default function ModernDashboard() {
               </Button>
             </DropdownMenuContent>
           </DropdownMenu>
+=======
+    <DashboardShell>
+      <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-2">
+          <h1 className="text-3xl font-bold">Dashboard</h1>
+          <p className="text-muted-foreground">
+            Bienvenue, {session?.user?.name || "Administrateur"}! Voici un aperçu des statistiques de votre plateforme.
+          </p>
+>>>>>>> Stashed changes
         </div>
 
         {/* Navigation Menu */}

@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export default withAuth(
     function middleware(req) {
         const token = req.nextauth.token;
-        const isAdmin = token?.role === "user";
+        const isAdmin = token?.role === "admin";
         const isAuthPage = req.nextUrl.pathname.startsWith("/auth");
 
         // Si l'utilisateur n'est pas un admin et n'est pas sur la page d'authentification

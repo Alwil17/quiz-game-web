@@ -28,7 +28,7 @@ export const authOptions: NextAuthOptions = {
 
           const user = response.data;
 
-          if (user && user.role === "user") {
+          if (user && user.role === "admin") {
             return {
               id: user.id,
               name: user.name,
@@ -63,7 +63,7 @@ export const authOptions: NextAuthOptions = {
       }
 
       if (user) {
-        if (user.role !== "user") {
+        if (user.role !== "admin") {
           throw new Error("Accès non autorisé");
         }
         token.id = user.id;

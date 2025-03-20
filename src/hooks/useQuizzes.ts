@@ -122,6 +122,7 @@ export const useQuizzes = () => {
     fetchQuiz,
     createQuiz,
     updateQuiz,
-    deleteQuiz
+    deleteQuiz,
+    createQuizzesBulk
   };
 }; 

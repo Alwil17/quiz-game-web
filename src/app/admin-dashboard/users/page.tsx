@@ -138,7 +138,6 @@ export default function UsersPage() {
       } else {
         await createUser(formData as CreateUserDto);
       }
-
       toast({
         title: "Utilisateur créé",
         description: "L'utilisateur a été créé avec succès.",
@@ -148,8 +147,7 @@ export default function UsersPage() {
     } catch (error) {
       toast({
         title: "Erreur",
-        description:
-          "Une erreur est survenue lors de la création de l'utilisateur.",
+        description: "Une erreur est survenue lors de la création de l'utilisateur.",
         variant: "destructive",
       });
     }
@@ -179,8 +177,7 @@ export default function UsersPage() {
     } catch (error) {
       toast({
         title: "Erreur",
-        description:
-          "Une erreur est survenue lors de la mise à jour de l'utilisateur.",
+        description: "Une erreur est survenue lors de la mise à jour de l'utilisateur.",
         variant: "destructive",
       });
     }
@@ -200,7 +197,6 @@ export default function UsersPage() {
       } else {
         await deleteUser(selectedUser.id);
       }
-
       toast({
         title: "Utilisateur supprimé",
         description: "L'utilisateur a été supprimé avec succès.",
@@ -210,8 +206,7 @@ export default function UsersPage() {
     } catch (error) {
       toast({
         title: "Erreur",
-        description:
-          "Une erreur est survenue lors de la suppression de l'utilisateur.",
+        description: "Une erreur est survenue lors de la suppression de l'utilisateur.",
         variant: "destructive",
       });
     }
@@ -233,6 +228,7 @@ export default function UsersPage() {
       name: user.name,
       email: user.email,
       role: user.role,
+
     });
     setIsEditing(true);
   };
@@ -338,6 +334,22 @@ export default function UsersPage() {
                 data={displayedUsers}
                 searchColumn="name"
                 searchPlaceholder="Rechercher un utilisateur..."
+
+<!--             {loading ? (
+              <div className="flex justify-center py-10">
+                <div className="h-10 w-10 animate-spin rounded-full border-2 border-primary border-r-transparent"></div>
+              </div>
+            ) : error ? (
+              <div className="py-10 text-center text-red-500">
+                Une erreur est survenue lors du chargement des utilisateurs.
+              </div>
+            ) : (
+              <DataTable 
+                columns={columns} 
+                data={users} 
+                searchColumn="name"
+                searchPlaceholder="Rechercher un utilisateur..."  -->
+
               />
             )}
           </CardContent>
@@ -476,7 +488,7 @@ export default function UsersPage() {
           <div className="py-4">
             <p>
               Êtes-vous sûr de vouloir supprimer l'utilisateur "
-              {selectedUser?.name}" ? Cette action est irréversible.
+              {selectedUser?.name}" ? Cette action est irréversible
             </p>
           </div>
           <DialogFooter>

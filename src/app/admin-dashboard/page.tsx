@@ -1,209 +1,56 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useSession, signIn, signOut } from "next-auth/react";
-import { redirect } from "next/navigation";
-
-// Shadcn UI Components
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { 
-  Home, 
-  BarChart2, 
-  Users, 
-  Settings, 
-  LogOut, 
-  Activity, 
-  TrendingUp, 
-  Layers,
-  Ban,
-  Edit,
-  Eye,
-  Trash2,
-  User
+import { useSession } from "next-auth/react";
+import {
+  BarChart2,
+  Users,
+  BookOpen,
+  Tag,
+  TrendingUp,
+  Activity
 } from "lucide-react";
 
-// Recharts for visualization
-import { 
-  BarChart, 
-  Bar, 
-  XAxis, 
-  YAxis, 
-  Tooltip, 
-  ResponsiveContainer, 
-  LineChart, 
-  Line 
-} from "recharts";
+// Composants
+import { DashboardShell } from "@/components/dashboard/dashboard-shell";
+import { StatCard } from "@/components/dashboard/stat-card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
-import { fetchCategoriesCount, fetchQuizzesCount, fetchUsersCount } from "../api/api";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
+// Data fetching 
+import { useUsers, useQuizzes, useCategories } from "@/hooks";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LineChart, Line } from "recharts";
 
-// Add this interface definition near the top of your file, after imports
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  role: string;
-  status: string;
-  registeredAt: string;
-  quizzesTaken: number;
-  avatar: string;
-}
-
-// Mock data
-const mockUsers = [
-  {
-    id: "1",
-    name: "John Doe",
-    email: "john.doe@example.com",
-    role: "user",
-    status: "active",
-    registeredAt: "2023-01-15",
-    quizzesTaken: 24,
-    avatar: ""
-  },
-  {
-    id: "2",
-    name: "Jane Smith",
-    email: "jane.smith@example.com", 
-    role: "admin",
-    status: "active",
-    registeredAt: "2022-11-20",
-    quizzesTaken: 42,
-    avatar: ""
-  },
-  {
-    id: "3",
-    name: "Mike Johnson",
-    email: "mike.johnson@example.com",
-    role: "user",
-    status: "suspended",
-    registeredAt: "2023-03-10",
-    quizzesTaken: 12,
-    avatar: ""
-  }
+// Données de visualisation fictives (à remplacer par des données réelles)
+const userActivityData = [
+  { name: "Jan", users: 400, quizzes: 240 },
+  { name: "Fév", users: 500, quizzes: 320 },
+  { name: "Mar", users: 600, quizzes: 380 },
+  { name: "Avr", users: 800, quizzes: 420 },
+  { name: "Mai", users: 1200, quizzes: 560 },
+  { name: "Jun", users: 1500, quizzes: 640 },
 ];
 
-// Mock data (replace with actual API calls)
-const userGrowthData = [
-  { name: "Jan", users: 400, newUsers: 100 },
-  { name: "Feb", users: 800, newUsers: 250 },
-  { name: "Mar", users: 1500, newUsers: 450 },
-  { name: "Apr", users: 2000, newUsers: 600 },
-  { name: "May", users: 2500, newUsers: 750 },
-];
-
-const quizActivityData = [
-  { name: "Jan", quizzes: 200, completions: 150 },
-  { name: "Feb", quizzes: 350, completions: 280 },
-  { name: "Mar", quizzes: 500, completions: 400 },
-  { name: "Apr", quizzes: 700, completions: 550 },
-  { name: "May", quizzes: 900, completions: 720 },
-];
-export default function ModernDashboard() {
-  const { data: session, status } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect('/auth/signin');
-    },
-  });
-
+export default function AdminDashboard() {
+  // Hooks d'authentification et d'état
+  const { data: session } = useSession();
+  
+  // Hooks de données
+  const { users, loading: usersLoading, fetchUsers } = useUsers();
+  const { quizzes, loading: quizzesLoading, fetchQuizzes } = useQuizzes();
+  const { categories, loading: categoriesLoading, fetchCategories } = useCategories();
+  
   const [activeTab, setActiveTab] = useState("overview");
-  const [userCount, setUserCount] = useState(0);
-  const [user, setUser] = useState(0);
-  const [users, setUsers] = useState<User[]>(mockUsers);
-  const [quizCount, setQuizCount] = useState(0);
-  const [categoryCount, setCategoryCount] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
-  const [selectedUser, setSelectedUser] = useState<User | null>(null);
-  const [dialogType, setDialogType] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
 
-
+  // Charger les données au premier rendu
   useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      setError(null);
-      try {
-        const [users, quizzes, categories] = await Promise.all([
-          fetchUsersCount(),
-          fetchQuizzesCount(),
-          fetchCategoriesCount()
-        ]);
-        
-        setUserCount(users);
-        setUser(users);
-        setUsers(users);
-        setQuizCount(quizzes);
-        setCategoryCount(categories);
-      } catch (err) {
-        console.error("Erreur lors de la récupération des données:", err);
-        setError("Impossible de charger les données. Veuillez réessayer plus tard.");
-        // Valeurs de repli pour développement
-        setUserCount(125);
-        setQuizCount(42);
-        setCategoryCount(8);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchData();
+    fetchUsers();
+    fetchQuizzes();
+    fetchCategories();
   }, []);
 
-  const handleUserAction = (action: 'view' | 'edit' | 'suspend' | 'delete', user: any) => {
-    switch(action) {
-      case 'view':
-        setSelectedUser(user);
-        setDialogType('view');
-        break;
-      case 'edit':
-        setSelectedUser(user);
-        setDialogType('edit');
-        break;
-      case 'suspend':
-        const updatedUsers = users.map(u => 
-          u.id === user.id 
-            ? {...u, status: u.status === 'suspended' ? 'active' : 'suspended'}
-            : u
-        );
-        setUsers(updatedUsers);
-        break;
-      case 'delete':
-        setSelectedUser(user);
-        setDialogType('delete');
-        break;
-    }
-  };
-
-  const confirmDelete = () => {
-    if (selectedUser) {
-      const filteredUsers = users.filter(u => u.id !== selectedUser.id);
-      setUsers(filteredUsers);
-      setDialogType(null);
-      setSelectedUser(null);
-    }
-  };
-
-
-  if (status === "loading" || isLoading) {
-    return (
-      <div className="flex items-center justify-center h-screen bg-gray-100">
-        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-blue-500"></div>
-      </div>
-    );
-  }
-
-  if (!session) return null;
-
   return (
-<<<<<<< Updated upstream
     <div className="flex h-screen bg-gray-50">
       {/* Sidebar */}
       <div className="w-64 bg-white border-r shadow-lg p-6 flex flex-col">
@@ -247,7 +94,6 @@ export default function ModernDashboard() {
               </Button>
             </DropdownMenuContent>
           </DropdownMenu>
-=======
     <DashboardShell>
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-2">
@@ -255,394 +101,175 @@ export default function ModernDashboard() {
           <p className="text-muted-foreground">
             Bienvenue, {session?.user?.name || "Administrateur"}! Voici un aperçu des statistiques de votre plateforme.
           </p>
->>>>>>> Stashed changes
+
         </div>
 
-        {/* Navigation Menu */}
-        <nav className="space-y-1 flex-1">
-          <Button
-            variant={activeTab === "overview" ? "default" : "ghost"}
-            className="w-full justify-start"
-            onClick={() => setActiveTab("overview")}
-          >
-            <Home className="mr-2 h-4 w-4" /> Dashboard
-          </Button>
-
-          <Button
-            variant={activeTab === "analytics" ? "default" : "ghost"}
-            className="w-full justify-start"
-            onClick={() => setActiveTab("analytics")}
-          >
-            <BarChart2 className="mr-2 h-4 w-4" /> Analytics
-          </Button>
-
-          <Button
-            variant={activeTab === "users" ? "default" : "ghost"}
-            className="w-full justify-start"
-            onClick={() => setActiveTab("users")}
-          >
-            <Users className="mr-2 h-4 w-4" /> Users
-          </Button>
-
-          {/* CRUD Management Sections */}
-          <div className="pt-4">
-            <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 pl-2">
-              Content Management
-            </p>
-          </div>
-
-          <Button variant="ghost" className="w-full justify-start">
-            <Layers className="mr-2 h-4 w-4" /> Categories
-          </Button>
-
-          <Button variant="ghost" className="w-full justify-start">
-            <Activity className="mr-2 h-4 w-4" /> Quizzes
-          </Button>
-
-          <Button variant="ghost" className="w-full justify-start">
-            <TrendingUp className="mr-2 h-4 w-4" /> Questions
-          </Button>
-
-          <div className="pt-4">
-            <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 pl-2">
-              System
-            </p>
-          </div>
-
-          <Button variant="ghost" className="w-full justify-start">
-            <Settings className="mr-2 h-4 w-4" /> Settings
-          </Button>
-        </nav>
-      </div>
-
-      {/* Main Content */}
-      <div className="flex-1 p-8 overflow-y-auto">
-        {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-            <p>{error}</p>
-          </div>
-        )}
-
-        {activeTab === "overview" && (
-          <div>
-            <h1 className="text-3xl font-bold mb-6">Dashboard Overview</h1>
-
-            <div className="grid grid-cols-3 gap-6">
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">
-                    Total Users
-                  </CardTitle>
-                  <Users className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{userCount}</div>
-                  <p className="text-xs text-green-500">
-                    +20.1% from last month
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">
-                    Active Quizzes
-                  </CardTitle>
-                  <Activity className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{quizCount}</div>
-                  <p className="text-xs text-green-500">
-                    +15.3% from last month
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">
-                    Categories
-                  </CardTitle>
-                  <Layers className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{categoryCount}</div>
-                  <p className="text-xs text-green-500">
-                    +5.2% from last month
-                  </p>
-                </CardContent>
-              </Card>
+        <Tabs defaultValue="overview" className="space-y-4" onValueChange={setActiveTab}>
+          <TabsList>
+            <TabsTrigger value="overview">Aperçu</TabsTrigger>
+            <TabsTrigger value="analytics">Statistiques</TabsTrigger>
+            <TabsTrigger value="activity">Activité</TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="overview" className="space-y-4">
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+              <StatCard 
+                title="Utilisateurs" 
+                value={usersLoading ? "..." : users.length}
+                icon={<Users className="h-4 w-4" />}
+                loading={usersLoading}
+                trend={{ value: 12, isPositive: true }}
+              />
+              <StatCard
+                title="Quiz"
+                value={quizzesLoading ? "..." : quizzes.length}
+                icon={<BookOpen className="h-4 w-4" />}
+                loading={quizzesLoading}
+                trend={{ value: 8, isPositive: true }}
+              />
+              <StatCard
+                title="Catégories"
+                value={categoriesLoading ? "..." : categories.length}
+                icon={<Tag className="h-4 w-4" />}
+                loading={categoriesLoading}
+              />
+              <StatCard
+                title="Activité"
+                value={quizzesLoading || usersLoading ? "..." : `${quizzes.length + users.length} actions`}
+                icon={<Activity className="h-4 w-4" />}
+                loading={quizzesLoading || usersLoading}
+                description="Total des quiz et utilisateurs"
+              />
             </div>
-
-            <div className="grid grid-cols-2 gap-6 mt-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>User Growth</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ResponsiveContainer width="100%" height={250}>
-                    <BarChart data={userGrowthData}>
+            
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+              <Card className="col-span-4 p-6">
+                <div className="flex flex-col space-y-2">
+                  <h3 className="text-lg font-medium">Évolution des utilisateurs</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Nombre de nouveaux utilisateurs sur les 6 derniers mois
+                  </p>
+                </div>
+                <div className="h-[300px]">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart data={userActivityData}>
                       <XAxis dataKey="name" />
                       <YAxis />
                       <Tooltip />
-                      <Bar dataKey="users" fill="#8884d8" />
-                      <Bar dataKey="newUsers" fill="#82ca9d" />
+                      <Bar dataKey="users" name="Utilisateurs" fill="#6366f1" />
                     </BarChart>
                   </ResponsiveContainer>
-                </CardContent>
+                </div>
               </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle>Quiz Activity</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ResponsiveContainer width="100%" height={250}>
-                    <LineChart data={quizActivityData}>
+              
+              <Card className="col-span-3 p-6">
+                <div className="flex flex-col space-y-2">
+                  <h3 className="text-lg font-medium">Activité des quiz</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Nombre de quiz créés par mois
+                  </p>
+                </div>
+                <div className="h-[300px]">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <LineChart data={userActivityData}>
                       <XAxis dataKey="name" />
                       <YAxis />
                       <Tooltip />
                       <Line
                         type="monotone"
                         dataKey="quizzes"
-                        stroke="#8884d8"
-                        strokeWidth={2}
-                      />
-                      <Line
-                        type="monotone"
-                        dataKey="completions"
-                        stroke="#82ca9d"
+                        stroke="#6366f1"
                         strokeWidth={2}
                       />
                     </LineChart>
                   </ResponsiveContainer>
-                </CardContent>
+                </div>
               </Card>
             </div>
-          </div>
-        )}
-
-        {activeTab === "analytics" && (
-          <div>
-            <h1 className="text-3xl font-bold mb-6">Detailed Analytics</h1>
-
-            <div className="grid grid-cols-2 gap-6 mb-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>User Distribution</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-500">
-                    Cette section affichera la répartition des utilisateurs par
-                    rôle (user, admin, player).
+          </TabsContent>
+          
+          <TabsContent value="analytics" className="space-y-4">
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              <Card className="col-span-2 p-6">
+                <div className="flex flex-col space-y-2">
+                  <h3 className="text-lg font-medium">Utilisateurs par mois</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Croissance des utilisateurs au fil du temps
                   </p>
-                </CardContent>
+                </div>
+                <div className="h-[300px]">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart data={userActivityData}>
+                      <XAxis dataKey="name" />
+                      <YAxis />
+                      <Tooltip />
+                      <Bar dataKey="users" name="Utilisateurs" fill="#6366f1" />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
               </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle>Quiz par Catégorie</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-500">
-                    Cette section affichera le nombre de quiz par catégorie.
+              
+              <Card className="p-6">
+                <div className="flex flex-col space-y-2">
+                  <h3 className="text-lg font-medium">Statistiques rapides</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Résumé des performances récentes
                   </p>
-                </CardContent>
-              </Card>
-            </div>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Quiz par Difficulté</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-500">
-                  Cette section affichera le nombre de quiz par niveau de
-                  difficulté (easy, medium, hard).
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        )}
-
-        {activeTab === "users" && (
-          <div>
-            <h1 className="text-3xl font-bold mb-6">User Management</h1>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Users List</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Name</TableHead>
-                      <TableHead>Email</TableHead>
-                      <TableHead>Role</TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead>Quizzes Taken</TableHead>
-                      <TableHead>Actions</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {users.map((user) => (
-                      <TableRow key={user.id}>
-                        <TableCell>
-                          <div className="flex items-center">
-                            <Avatar className="mr-3">
-                              <AvatarFallback>
-                                {user.name.charAt(0)}
-                              </AvatarFallback>
-                            </Avatar>
-                            {user.name}
-                          </div>
-                        </TableCell>
-                        <TableCell>{user.email}</TableCell>
-                        <TableCell>
-                          <Badge
-                            variant={
-                              user.role === "admin" ? "default" : "secondary"
-                            }
-                          >
-                            {user.role}
-                          </Badge>
-                        </TableCell>
-                        <TableCell>
-                          <Badge
-                            variant={
-                              user.status === "active"
-                                ? "outline"
-                                : "destructive"
-                            }
-                          >
-                            {user.status}
-                          </Badge>
-                        </TableCell>
-                        <TableCell>{user.quizzesTaken}</TableCell>
-                        <TableCell>
-                          <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                              <Button variant="ghost" size="sm">
-                                Actions
-                              </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent>
-                              <DropdownMenuItem
-                                onClick={() => handleUserAction("view", user)}
-                              >
-                                <Eye className="mr-2 h-4 w-4" /> View Details
-                              </DropdownMenuItem>
-                              <DropdownMenuItem
-                                onClick={() => handleUserAction("edit", user)}
-                              >
-                                <Edit className="mr-2 h-4 w-4" /> Edit
-                              </DropdownMenuItem>
-                              <DropdownMenuItem
-                                onClick={() =>
-                                  handleUserAction("suspend", user)
-                                }
-                              >
-                                <Ban className="mr-2 h-4 w-4" />
-                                {user.status === "suspended"
-                                  ? "Activate"
-                                  : "Suspend"}
-                              </DropdownMenuItem>
-                              <DropdownMenuItem
-                                onClick={() => handleUserAction("delete", user)}
-                                className="text-red-600"
-                              >
-                                <Trash2 className="mr-2 h-4 w-4" /> Delete
-                              </DropdownMenuItem>
-                            </DropdownMenuContent>
-                          </DropdownMenu>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </CardContent>
-            </Card>
-          </div>
-        )}
-
-        {/* User Details Dialog */}
-        <Dialog
-          open={
-            dialogType === "view" ||
-            dialogType === "edit" ||
-            dialogType === "delete"
-          }
-          onOpenChange={() => setDialogType(null)}
-        >
-          <DialogContent>
-            {dialogType === "view" && selectedUser && (
-              <>
-                <DialogHeader>
-                  <DialogTitle>User Details</DialogTitle>
-                  <DialogDescription>
-                    Detailed information about the selected user
-                  </DialogDescription>
-                </DialogHeader>
-                <div className="flex items-center space-x-4">
-                  <Avatar className="h-16 w-16">
-                    <AvatarFallback>
-                      {selectedUser.name.charAt(0)}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <p>
-                      <strong>Name:</strong> {selectedUser.name}
-                    </p>
-                    <p>
-                      <strong>Email:</strong> {selectedUser.email}
-                    </p>
-                    <p>
-                      <strong>Role:</strong> {selectedUser.role}
-                    </p>
-                    <p>
-                      <strong>Status:</strong> {selectedUser.status}
-                    </p>
-                    <p>
-                      <strong>Registered:</strong> {selectedUser.registeredAt}
-                    </p>
-                    <p>
-                      <strong>Quizzes Taken:</strong>{" "}
-                      {selectedUser.quizzesTaken}
-                    </p>
+                </div>
+                <div className="mt-4 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium">Utilisateurs actifs</span>
+                    <span className="text-sm font-bold">{usersLoading ? "..." : users.length}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium">Quiz populaires</span>
+                    <span className="text-sm font-bold">{quizzesLoading ? "..." : quizzes.length}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium">Taux de complétion</span>
+                    <span className="text-sm font-bold">76%</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium">Temps de réponse moyen</span>
+                    <span className="text-sm font-bold">1.2 min</span>
                   </div>
                 </div>
-              </>
-            )}
-
-            {dialogType === "delete" && selectedUser && (
-              <>
-                <DialogHeader>
-                  <DialogTitle>Delete User</DialogTitle>
-                  <DialogDescription>
-                    Are you sure you want to delete this user?
-                  </DialogDescription>
-                </DialogHeader>
-                <Alert variant="destructive">
-                  <AlertTitle>Confirm Deletion</AlertTitle>
-                  <AlertDescription>
-                    User {selectedUser.name} will be permanently removed from
-                    the system.
-                  </AlertDescription>
-                </Alert>
-                <div className="flex justify-end space-x-2">
-                  <Button variant="outline" onClick={() => setDialogType(null)}>
-                    Cancel
-                  </Button>
-                  <Button variant="destructive" onClick={confirmDelete}>
-                    Confirm Delete
-                  </Button>
-                </div>
-              </>
-            )}
-          </DialogContent>
-        </Dialog>
+              </Card>
+            </div>
+          </TabsContent>
+          
+          <TabsContent value="activity" className="space-y-4">
+            <Card className="p-6">
+              <div className="flex flex-col space-y-2">
+                <h3 className="text-lg font-medium">Activité récente</h3>
+                <p className="text-sm text-muted-foreground">
+                  Les activités les plus récentes sur la plateforme
+                </p>
+              </div>
+              <div className="mt-4 space-y-4">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <div key={i} className="flex items-center gap-4 border-b pb-4 last:border-0">
+                    <div className="rounded-full bg-primary/10 p-2">
+                      <Activity className="h-4 w-4 text-primary" />
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-sm font-medium">
+                        {["Quiz créé", "Nouvel utilisateur", "Quiz terminé", "Catégorie ajoutée", "Utilisateur modifié"][i]}
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        {["Il y a 5 minutes", "Il y a 10 minutes", "Il y a 25 minutes", "Il y a 35 minutes", "Il y a 45 minutes"][i]}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-4 flex justify-center">
+                <Button variant="outline">Voir toutes les activités</Button>
+              </div>
+            </Card>
+          </TabsContent>
+        </Tabs>
       </div>
-    </div>
+    </DashboardShell>
   );
 }

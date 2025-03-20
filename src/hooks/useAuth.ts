@@ -40,7 +40,7 @@ export const useAuth = () => {
 
     const isAuthenticated = status === 'authenticated';
     const isLoading = status === 'loading';
-    const isAdmin = userSession?.user?.role === 'user';
+    const isAdmin = userSession?.user?.role === 'admin';
 
     return {
         user: userSession?.user,

@@ -1,4 +1,5 @@
 import { Category } from "./category";
+import { QuestionBulkDto } from "./questions";
 
 export type QuizDifficulty = "easy" | "medium" | "hard";
 
@@ -29,3 +30,15 @@ export interface UpdateQuizDto {
   authorId?: number;
   difficulty?: QuizDifficulty;
 } 
+
+export interface BulkQuizDto {
+  name: string;
+  description?: string;
+  quizzes: CreateQuizDto[];
+}
+
+export interface QuizBulkDto {
+  title: string;
+  difficulty: QuizDifficulty;
+  questions: QuestionBulkDto[];
+}

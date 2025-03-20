@@ -41,7 +41,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { toast } from "@/components/ui/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 import { ColumnDef } from "@tanstack/react-table";
 
 // Mock data to use if API fails
@@ -70,6 +70,7 @@ const mockUsers: User[] = [
 ];
 
 export default function UsersPage() {
+  const { toast } = useToast();
   const [isCreating, setIsCreating] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -129,7 +130,7 @@ export default function UsersPage() {
       if (useMockData) {
         // Add to mock data
         const newUser: User = {
-          id: (mockUsers.length + 1).toString(),
+          id: mockUsers.length + 1,
           ...(formData as CreateUserDto),
           createdAt: new Date().toISOString(),
         };
@@ -147,7 +148,8 @@ export default function UsersPage() {
     } catch (error) {
       toast({
         title: "Erreur",
-        description: "Une erreur est survenue lors de la création de l'utilisateur.",
+        description:
+          "Une erreur est survenue lors de la création de l'utilisateur.",
         variant: "destructive",
       });
     }
@@ -177,7 +179,8 @@ export default function UsersPage() {
     } catch (error) {
       toast({
         title: "Erreur",
-        description: "Une erreur est survenue lors de la mise à jour de l'utilisateur.",
+        description:
+          "Une erreur est survenue lors de la mise à jour de l'utilisateur.",
         variant: "destructive",
       });
     }
@@ -187,16 +190,7 @@ export default function UsersPage() {
     if (!selectedUser) return;
 
     try {
-      if (useMockData) {
-        // Remove from mock data
-        const index = mockUsers.findIndex((u) => u.id === selectedUser.id);
-        if (index !== -1) {
-          mockUsers.splice(index, 1);
-          setDisplayedUsers([...mockUsers]);
-        }
-      } else {
-        await deleteUser(selectedUser.id);
-      }
+      await deleteUser(selectedUser.id);
       toast({
         title: "Utilisateur supprimé",
         description: "L'utilisateur a été supprimé avec succès.",
@@ -206,7 +200,8 @@ export default function UsersPage() {
     } catch (error) {
       toast({
         title: "Erreur",
-        description: "Une erreur est survenue lors de la suppression de l'utilisateur.",
+        description:
+          "Une erreur est survenue lors de la suppression de l'utilisateur.",
         variant: "destructive",
       });
     }
@@ -228,7 +223,6 @@ export default function UsersPage() {
       name: user.name,
       email: user.email,
       role: user.role,
-
     });
     setIsEditing(true);
   };
@@ -335,21 +329,20 @@ export default function UsersPage() {
                 searchColumn="name"
                 searchPlaceholder="Rechercher un utilisateur..."
 
-// <!--             {loading ? (
-//               <div className="flex justify-center py-10">
-//                 <div className="h-10 w-10 animate-spin rounded-full border-2 border-primary border-r-transparent"></div>
-//               </div>
-//             ) : error ? (
-//               <div className="py-10 text-center text-red-500">
-//                 Une erreur est survenue lors du chargement des utilisateurs.
-//               </div>
-//             ) : (
-//               <DataTable 
-//                 columns={columns} 
-//                 data={users} 
-//                 searchColumn="name"
-//                 searchPlaceholder="Rechercher un utilisateur..."  -->
-
+                // <!--             {loading ? (
+                //               <div className="flex justify-center py-10">
+                //                 <div className="h-10 w-10 animate-spin rounded-full border-2 border-primary border-r-transparent"></div>
+                //               </div>
+                //             ) : error ? (
+                //               <div className="py-10 text-center text-red-500">
+                //                 Une erreur est survenue lors du chargement des utilisateurs.
+                //               </div>
+                //             ) : (
+                //               <DataTable
+                //                 columns={columns}
+                //                 data={users}
+                //                 searchColumn="name"
+                //                 searchPlaceholder="Rechercher un utilisateur..."  -->
               />
             )}
           </CardContent>

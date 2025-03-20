@@ -60,6 +60,11 @@ export function DashboardShell({ children }: DashboardShellProps) {
       icon: BookOpen,
     },
     {
+      title: "Questions",
+      href: "/admin-dashboard/questions",
+      icon: HelpCircle,
+    },
+    {
       title: "Catégories",
       href: "/admin-dashboard/categories",
       icon: Tag,
@@ -226,7 +231,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
               <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 pl-2">
                 Content Management
               </p>
-              {sidebarNavItems.slice(2, 5).map((item, index) => (
+              {sidebarNavItems.slice(2, 6).map((item, index) => (
                 <Button
                   key={index}
                   variant={isLinkActive(item.href) ? "default" : "ghost"}

@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { quizzesApi } from '@/app/api/api';
-import { Quiz, CreateQuizDto, UpdateQuizDto } from '@/types';
+import { bulkQuizzesApi, quizzesApi } from '@/app/api/api';
+import { Quiz, CreateQuizDto, UpdateQuizDto, BulkQuizDto } from '@/types';
 
 export const useQuizzes = () => {
   const [quizzes, setQuizzes] = useState<Quiz[]>([]);
@@ -91,6 +91,23 @@ export const useQuizzes = () => {
       setError(`Failed to delete quiz with ID: ${id}`);
       console.error(err);
       return false;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Quiz bulk
+  const createQuizzesBulk = async (quizzesDto: BulkQuizDto[]) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await bulkQuizzesApi.create(quizzesDto);
+      setQuizzes([...quizzes, ...response.data]);
+      return response.data;
+    } catch (err) {
+      setError("Failed to create quizzes");
+      console.error(err);
+      return [];
     } finally {
       setLoading(false);
     }

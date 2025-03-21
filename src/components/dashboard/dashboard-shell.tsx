@@ -237,7 +237,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
               <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 pl-2">
                 Content Management
               </p>
-              {sidebarNavItems.slice(2, 6).map((item, index) => (
+              {sidebarNavItems.slice(2, 7).map((item, index) => (
                 <Button
                   key={index}
                   variant={isLinkActive(item.href) ? "default" : "ghost"}

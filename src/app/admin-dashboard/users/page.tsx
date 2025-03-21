@@ -143,6 +143,7 @@ export default function UsersPage() {
       toast({
         title: "Utilisateur créé",
         description: "L'utilisateur a été créé avec succès.",
+        variant: "success",
       });
       setIsCreating(false);
       resetForm();
@@ -195,15 +196,14 @@ export default function UsersPage() {
 
     try {
       if (useMockData) {
-        // Delete from mock data
-        const index = mockUsers.findIndex((u) => u.id === selectedUser.id);
-        if (index !== -1) {
-          mockUsers.splice(index, 1);
-          setDisplayedUsers([...mockUsers]);
-        }
+        // Remove from mock data
+        const filteredUsers = mockUsers.filter(u => u.id !== selectedUser.id);
+        mockUsers.length = 0; // Clear the array
+        mockUsers.push(...filteredUsers); // Repopulate with filtered data
+        setDisplayedUsers([...mockUsers]);
       } else {
         await deleteUser(selectedUser.id);
-        await fetchUsers(); // Rafraîchir la liste après suppression
+        await fetchUsers(); // Refresh the list after deletion
       }
       
       toast({
@@ -418,10 +418,13 @@ export default function UsersPage() {
       </Dialog>
 
       {/* Dialogue d'édition d'utilisateur */}
-      <Dialog open={isEditing} onOpenChange={(open) => {
-        setIsEditing(open);
-        if (!open) resetForm();
-      }}>
+      <Dialog
+        open={isEditing}
+        onOpenChange={(open) => {
+          setIsEditing(open);
+          if (!open) resetForm();
+        }}
+      >
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Modifier l'utilisateur</DialogTitle>
@@ -468,10 +471,13 @@ export default function UsersPage() {
             </div>
           </div>
           <DialogFooter>
-            <Button variant="outline" onClick={() => {
-              setIsEditing(false);
-              resetForm();
-            }}>
+            <Button
+              variant="outline"
+              onClick={() => {
+                setIsEditing(false);
+                resetForm();
+              }}
+            >
               Annuler
             </Button>
             <Button onClick={handleUpdate}>Enregistrer</Button>
@@ -480,10 +486,13 @@ export default function UsersPage() {
       </Dialog>
 
       {/* Dialogue de suppression d'utilisateur */}
-      <Dialog open={isDeleting} onOpenChange={(open) => {
-        setIsDeleting(open);
-        if (!open) setSelectedUser(null);
-      }}>
+      <Dialog
+        open={isDeleting}
+        onOpenChange={(open) => {
+          setIsDeleting(open);
+          if (!open) setSelectedUser(null);
+        }}
+      >
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Supprimer l'utilisateur</DialogTitle>

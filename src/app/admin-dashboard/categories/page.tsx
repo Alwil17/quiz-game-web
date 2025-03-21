@@ -81,13 +81,14 @@ export default function CategoryPage() {
       setNewCategory({ name: "", description: "" });
       setIsCreating(false);
       toast({
-        title: "Success",
-        description: "Category created successfully",
+        title: "Réussi!",
+        description: "Catégorie créé avec succès",
+        variant: "success",
       });
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to create category",
+        title: "Erreur!",
+        description: "Suppression échouée de la catégorie",
         variant: "destructive",
       });
     }
@@ -102,13 +103,14 @@ export default function CategoryPage() {
       setEditedCategory({ name: "", description: "" });
       setIsEditing(false);
       toast({
-        title: "Success",
-        description: "Category updated successfully",
+        title: "Succès!",
+        description: "Catégorie modifiée avec succès",
+        variant: "success",
       });
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to update category",
+        title: "Erreur!",
+        description: "Echec de la modiication ",
         variant: "destructive",
       });
     }
@@ -122,13 +124,14 @@ export default function CategoryPage() {
       setSelectedCategory(null);
       setIsDeleting(false);
       toast({
-        title: "Success",
-        description: "Category deleted successfully",
+        title: "Succès!",
+        description: "Catégorie supprimé avec succès",
+        variant: "success",
       });
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to delete category",
+        title: "Erreur!",
+        description: "Echec de la suppression",
         variant: "destructive",
       });
     }
@@ -137,7 +140,7 @@ export default function CategoryPage() {
   const columns: ColumnDef<Category>[] = [
     {
       accessorKey: "name",
-      header: "Name",
+      header: "Nom",
     },
     {
       accessorKey: "description",
@@ -168,7 +171,7 @@ export default function CategoryPage() {
                 }}
               >
                 <Edit className="mr-2 h-4 w-4" />
-                Edit
+                Modifier
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() => {
@@ -177,7 +180,7 @@ export default function CategoryPage() {
                 }}
               >
                 <Trash2 className="mr-2 h-4 w-4" />
-                Delete
+                Supprimer
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -190,17 +193,19 @@ export default function CategoryPage() {
     <DashboardShell>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle>Categories</CardTitle>
+          <CardTitle>Catégories</CardTitle>
           <Button onClick={() => setIsCreating(true)}>
             <Plus className="mr-2 h-4 w-4" />
-            Add Category
+            Ajouter Catégorie
           </Button>
         </CardHeader>
         <CardContent>
           {error ? (
-            <p className="text-red-500">Error loading categories: {error}</p>
+            <p className="text-red-500">Erreur lors du chargement catégories: {error}</p>
           ) : loading ? (
-            <p>Loading categories...</p>
+            <div className="flex justify-center py-10">
+              <div className="h-10 w-10 animate-spin rounded-full border-2 border-primary border-r-transparent"></div>
+            </div>
           ) : (
             <DataTable columns={columns} data={categories || []} />
           )}
@@ -295,11 +300,11 @@ export default function CategoryPage() {
           </DialogHeader>
           <div className="py-4">
             <p>
-              Are you sure you want to delete the category "
+              Êtes-vous sûr de vouloir supprimer la catégorie "
               {selectedCategory?.name}"?
             </p>
             <p className="text-sm text-muted-foreground mt-2">
-              This action cannot be undone.
+              Cette action est irréversible.
             </p>
           </div>
           <DialogFooter>

@@ -43,6 +43,7 @@ import {
 } from "@/components/ui/select";
 import { useToast } from "@/components/ui/use-toast";
 import { ColumnDef } from "@tanstack/react-table";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 // Mock data to use if API fails
 const mockUsers: User[] = [
@@ -124,6 +125,62 @@ export default function UsersPage() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // State to track selected users
+  const [selectedUserIds, setSelectedUserIds] = useState<number[]>([]);
+  const [isBatchDeleting, setIsBatchDeleting] = useState(false);
+
+  // Function to toggle selection of a user
+  const toggleUserSelection = (userId: number) => {
+    setSelectedUserIds((prev) =>
+      prev.includes(userId)
+        ? prev.filter((id) => id !== userId)
+        : [...prev, userId]
+    );
+  };
+
+  // Function to toggle selection of all displayed users
+  const toggleAllUsers = () => {
+    if (selectedUserIds.length === displayedUsers.length) {
+      setSelectedUserIds([]);
+    } else {
+      setSelectedUserIds(displayedUsers.map((user) => user.id));
+    }
+  };
+
+  // Batch delete function
+  const handleBatchDelete = async () => {
+    try {
+      if (useMockData) {
+        // Remove selected users from mock data
+        const filteredUsers = mockUsers.filter(
+          (u) => !selectedUserIds.includes(u.id)
+        );
+        mockUsers.length = 0;
+        mockUsers.push(...filteredUsers);
+        setDisplayedUsers([...mockUsers]);
+      } else {
+        // Delete each selected user via API
+        await Promise.all(selectedUserIds.map((id) => deleteUser(id)));
+        await fetchUsers();
+      }
+
+      toast({
+        title: "Utilisateurs supprimés",
+        description: `${selectedUserIds.length} utilisateur(s) ont été supprimés avec succès.`,
+      });
+      setIsBatchDeleting(false);
+      setSelectedUserIds([]);
+    } catch (error) {
+      console.error("Erreur suppression utilisateurs:", error);
+      toast({
+        title: "Erreur",
+        description:
+          "Une erreur est survenue lors de la suppression des utilisateurs.",
+        variant: "destructive",
+      });
+    }
+  };
+
   // Actions utilisateur
   const handleCreate = async () => {
     try {
@@ -143,6 +200,7 @@ export default function UsersPage() {
       toast({
         title: "Utilisateur créé",
         description: "L'utilisateur a été créé avec succès.",
+        variant: "success",
       });
       setIsCreating(false);
       resetForm();
@@ -195,17 +253,16 @@ export default function UsersPage() {
 
     try {
       if (useMockData) {
-        // Delete from mock data
-        const index = mockUsers.findIndex((u) => u.id === selectedUser.id);
-        if (index !== -1) {
-          mockUsers.splice(index, 1);
-          setDisplayedUsers([...mockUsers]);
-        }
+        // Remove from mock data
+        const filteredUsers = mockUsers.filter((u) => u.id !== selectedUser.id);
+        mockUsers.length = 0; // Clear the array
+        mockUsers.push(...filteredUsers); // Repopulate with filtered data
+        setDisplayedUsers([...mockUsers]);
       } else {
         await deleteUser(selectedUser.id);
-        await fetchUsers(); // Rafraîchir la liste après suppression
+        await fetchUsers(); // Refresh the list after deletion
       }
-      
+
       toast({
         title: "Utilisateur supprimé",
         description: "L'utilisateur a été supprimé avec succès.",
@@ -253,18 +310,37 @@ export default function UsersPage() {
     {
       accessorKey: "id",
       header: "ID",
+      enableSorting: true,
     },
     {
       accessorKey: "name",
-      header: "Nom",
-    },
-    {
-      accessorKey: "email",
-      header: "Email",
+      header: "Utilisateur",
+      enableSorting: true,
+      cell: ({ row }) => (
+        <div className="flex items-center space-x-3">
+          <Avatar className="h-10 w-10">
+            <AvatarFallback>
+              {row.original.name
+                .split(" ")
+                .map((part) => part[0])
+                .join("")
+                .toUpperCase()
+                .substring(0, 2)}
+            </AvatarFallback>
+          </Avatar>
+          <div className="flex flex-col">
+            <span className="font-medium">{row.original.name}</span>
+            <span className="text-sm text-muted-foreground">
+              {row.original.email}
+            </span>
+          </div>
+        </div>
+      ),
     },
     {
       accessorKey: "role",
       header: "Rôle",
+      enableSorting: true,
       cell: ({ row }) => (
         <Badge variant={row.original.role === "admin" ? "default" : "outline"}>
           {row.original.role}
@@ -274,10 +350,13 @@ export default function UsersPage() {
     {
       accessorKey: "createdAt",
       header: "Date de création",
+      enableSorting: true,
+      sortingFn: "datetime",
       cell: ({ row }) => new Date(row.original.createdAt).toLocaleDateString(),
     },
     {
       id: "actions",
+      enableSorting: false,
       cell: ({ row }) => (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -418,10 +497,13 @@ export default function UsersPage() {
       </Dialog>
 
       {/* Dialogue d'édition d'utilisateur */}
-      <Dialog open={isEditing} onOpenChange={(open) => {
-        setIsEditing(open);
-        if (!open) resetForm();
-      }}>
+      <Dialog
+        open={isEditing}
+        onOpenChange={(open) => {
+          setIsEditing(open);
+          if (!open) resetForm();
+        }}
+      >
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Modifier l'utilisateur</DialogTitle>
@@ -468,10 +550,13 @@ export default function UsersPage() {
             </div>
           </div>
           <DialogFooter>
-            <Button variant="outline" onClick={() => {
-              setIsEditing(false);
-              resetForm();
-            }}>
+            <Button
+              variant="outline"
+              onClick={() => {
+                setIsEditing(false);
+                resetForm();
+              }}
+            >
               Annuler
             </Button>
             <Button onClick={handleUpdate}>Enregistrer</Button>
@@ -480,10 +565,13 @@ export default function UsersPage() {
       </Dialog>
 
       {/* Dialogue de suppression d'utilisateur */}
-      <Dialog open={isDeleting} onOpenChange={(open) => {
-        setIsDeleting(open);
-        if (!open) setSelectedUser(null);
-      }}>
+      <Dialog
+        open={isDeleting}
+        onOpenChange={(open) => {
+          setIsDeleting(open);
+          if (!open) setSelectedUser(null);
+        }}
+      >
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Supprimer l'utilisateur</DialogTitle>

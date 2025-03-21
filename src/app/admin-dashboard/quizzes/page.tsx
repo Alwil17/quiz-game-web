@@ -164,7 +164,7 @@ export default function QuizPage() {
       toast({
         title: "Succes",
         description: "Quiz créé !",
-        variant: "default",
+        variant: "success",
       });
       setIsCreating(false);
       fetchQuizzes().catch(() => {
@@ -195,7 +195,7 @@ export default function QuizPage() {
         toast({
           title: "Success",
           description: "Quiz updated successfully",
-          variant: "default",
+          variant: "success",
         });
         setIsEditing(false);
         fetchQuizzes().catch(() => {
@@ -228,7 +228,7 @@ export default function QuizPage() {
         toast({
           title: "Succès",
           description: "Quiz supprimé !",
-          variant: "default",
+          variant: "success",
         });
         setIsDeleting(false);
         fetchQuizzes().catch(() => {

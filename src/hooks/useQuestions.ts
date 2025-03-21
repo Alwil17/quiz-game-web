@@ -105,6 +105,21 @@ export const useQuestions = () => {
     }
   };
 
+  // get questions per quizzes
+  const fetchQuestionsPerQuizzes = async (quizId: number) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await questionsApi.getPerQuiz(quizId);
+      setQuestions(response.data);
+      return response.data;
+    } catch (err) {
+      setError("Failed to fetch questions");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return {
     questions,
     question,

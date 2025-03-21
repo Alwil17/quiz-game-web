@@ -49,7 +49,9 @@ export default function QuestionPage() {
   const [isCreating, setIsCreating] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [selectedQuestion, setSelectedQuestion] = useState<Question | null>(null);
+  const [selectedQuestion, setSelectedQuestion] = useState<Question | null>(
+    null
+  );
   const [bulkDialogOpen, setBulkDialogOpen] = useState(false);
   const [bulkQuestions, setBulkQuestions] = useState<string>("");
   const [selectedQuizId, setSelectedQuizId] = useState<string>("");
@@ -63,7 +65,7 @@ export default function QuestionPage() {
     quizId: "",
     points: 1,
   });
-  
+
   const {
     questions,
     question,
@@ -87,15 +89,13 @@ export default function QuestionPage() {
     {
       accessorKey: "text",
       header: "Question",
-      cell: ({ row }) => <div className="max-w-[500px] truncate">{row.getValue("text")}</div>,
+      cell: ({ row }) => (
+        <div className="max-w-[500px] truncate">{row.getValue("text")}</div>
+      ),
     },
     {
       accessorKey: "type",
       header: "Type",
-    },
-    {
-      accessorKey: "points",
-      header: "Points",
     },
     {
       id: "actions",
@@ -154,6 +154,7 @@ export default function QuestionPage() {
       toast({
         title: "Question créée",
         description: "La question a été créée avec succès",
+        variant: "success",
       });
       fetchQuestions();
     } catch (err) {
@@ -173,6 +174,7 @@ export default function QuestionPage() {
       toast({
         title: "Question mise à jour",
         description: "La question a été mise à jour avec succès",
+        variant: "success",
       });
       fetchQuestions();
     } catch (err) {
@@ -193,6 +195,7 @@ export default function QuestionPage() {
       toast({
         title: "Question supprimée",
         description: "La question a été supprimée avec succès",
+        variant: "success",
       });
       await fetchQuestions();
       setSelectedQuestion(null);
@@ -229,13 +232,14 @@ export default function QuestionPage() {
                 quizId: selectedQuizId,
                 points: q.points || 1,
               })),
-              quizId: selectedQuizId
+              quizId: selectedQuizId,
             };
-            
+
             await bulkCreateQuestions(parsedQuestions);
             toast({
               title: "Questions importées",
               description: "Les questions ont été importées avec succès",
+              variant: "success",
             });
             fetchQuestions();
           } catch (error) {
@@ -250,15 +254,21 @@ export default function QuestionPage() {
       } else {
         // Format texte existant
         const parsedQuestions: QuestionBulkDto = {
-          questions: bulkQuestions.split('\n\n').map(q => {
-            const lines = q.split('\n');
+          questions: bulkQuestions.split("\n\n").map((q) => {
+            const lines = q.split("\n");
             const text = lines[0];
-            const type = lines[1].includes('TRUE_FALSE') ? QuestionType.TRUE_FALSE : QuestionType.MULTIPLE_CHOICE;
-            const options = type === QuestionType.MULTIPLE_CHOICE 
-              ? lines.slice(2, lines.length - 1) 
-              : ["True", "False"];
-            const correctAnswer = lines[lines.length - 1].replace('Correct: ', '');
-            
+            const type = lines[1].includes("TRUE_FALSE")
+              ? QuestionType.TRUE_FALSE
+              : QuestionType.MULTIPLE_CHOICE;
+            const options =
+              type === QuestionType.MULTIPLE_CHOICE
+                ? lines.slice(2, lines.length - 1)
+                : ["True", "False"];
+            const correctAnswer = lines[lines.length - 1].replace(
+              "Correct: ",
+              ""
+            );
+
             return {
               text,
               type,
@@ -268,13 +278,14 @@ export default function QuestionPage() {
               points: 1,
             };
           }),
-          quizId: selectedQuizId
+          quizId: selectedQuizId,
         };
-        
+
         await bulkCreateQuestions(parsedQuestions);
         toast({
           title: "Questions importées",
           description: "Les questions ont été importées avec succès",
+          variant: "success",
         });
         fetchQuestions();
       }
@@ -308,7 +319,9 @@ export default function QuestionPage() {
         </CardHeader>
         <CardContent>
           {loading ? (
-            <div>Chargement...</div>
+            <div className="flex justify-center py-10">
+              <div className="h-10 w-10 animate-spin rounded-full border-2 border-primary border-r-transparent"></div>
+            </div>
           ) : error ? (
             <div>Erreur: {error}</div>
           ) : (
@@ -329,7 +342,9 @@ export default function QuestionPage() {
               <Textarea
                 id="text"
                 value={newQuestion.text}
-                onChange={(e) => setNewQuestion({ ...newQuestion, text: e.target.value })}
+                onChange={(e) =>
+                  setNewQuestion({ ...newQuestion, text: e.target.value })
+                }
               />
             </div>
             <div className="grid gap-2">
@@ -337,10 +352,16 @@ export default function QuestionPage() {
               <Select
                 value={newQuestion.type}
                 onValueChange={(value) => {
-                  const updatedQuestion = { ...newQuestion, type: value as QuestionType };
+                  const updatedQuestion = {
+                    ...newQuestion,
+                    type: value as QuestionType,
+                  };
                   if (value === QuestionType.TRUE_FALSE) {
                     updatedQuestion.options = ["True", "False"];
-                  } else if (value === QuestionType.MULTIPLE_CHOICE && updatedQuestion.options.length < 2) {
+                  } else if (
+                    value === QuestionType.MULTIPLE_CHOICE &&
+                    updatedQuestion.options.length < 2
+                  ) {
                     updatedQuestion.options = ["", "", "", ""];
                   }
                   setNewQuestion(updatedQuestion);
@@ -350,8 +371,12 @@ export default function QuestionPage() {
                   <SelectValue placeholder="Sélectionner le type" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value={QuestionType.MULTIPLE_CHOICE}>Choix multiple</SelectItem>
-                  <SelectItem value={QuestionType.TRUE_FALSE}>Vrai / Faux</SelectItem>
+                  <SelectItem value={QuestionType.MULTIPLE_CHOICE}>
+                    Choix multiple
+                  </SelectItem>
+                  <SelectItem value={QuestionType.TRUE_FALSE}>
+                    Vrai / Faux
+                  </SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -379,14 +404,19 @@ export default function QuestionPage() {
               {newQuestion.type === QuestionType.MULTIPLE_CHOICE ? (
                 <Select
                   value={newQuestion.correctAnswer}
-                  onValueChange={(value) => setNewQuestion({ ...newQuestion, correctAnswer: value })}
+                  onValueChange={(value) =>
+                    setNewQuestion({ ...newQuestion, correctAnswer: value })
+                  }
                 >
                   <SelectTrigger id="correctAnswer">
                     <SelectValue placeholder="Sélectionner la réponse correcte" />
                   </SelectTrigger>
                   <SelectContent>
                     {newQuestion.options.map((option, index) => (
-                      <SelectItem key={index} value={option || `option_${index + 1}`}>
+                      <SelectItem
+                        key={index}
+                        value={option || `option_${index + 1}`}
+                      >
                         {option || `Option ${index + 1}`}
                       </SelectItem>
                     ))}
@@ -395,7 +425,9 @@ export default function QuestionPage() {
               ) : (
                 <Select
                   value={newQuestion.correctAnswer}
-                  onValueChange={(value) => setNewQuestion({ ...newQuestion, correctAnswer: value })}
+                  onValueChange={(value) =>
+                    setNewQuestion({ ...newQuestion, correctAnswer: value })
+                  }
                 >
                   <SelectTrigger id="correctAnswer">
                     <SelectValue placeholder="Sélectionner la réponse correcte" />
@@ -412,7 +444,9 @@ export default function QuestionPage() {
               <Label htmlFor="quiz">Quiz</Label>
               <Select
                 value={newQuestion.quizId}
-                onValueChange={(value) => setNewQuestion({ ...newQuestion, quizId: value })}
+                onValueChange={(value) =>
+                  setNewQuestion({ ...newQuestion, quizId: value })
+                }
               >
                 <SelectTrigger id="quiz">
                   <SelectValue placeholder="Sélectionner un quiz" />
@@ -433,7 +467,12 @@ export default function QuestionPage() {
                 id="points"
                 type="number"
                 value={newQuestion.points}
-                onChange={(e) => setNewQuestion({ ...newQuestion, points: parseInt(e.target.value) || 1 })}
+                onChange={(e) =>
+                  setNewQuestion({
+                    ...newQuestion,
+                    points: parseInt(e.target.value) || 1,
+                  })
+                }
               />
             </div>
           </div>
@@ -459,7 +498,12 @@ export default function QuestionPage() {
                 <Textarea
                   id="edit-text"
                   value={selectedQuestion.text}
-                  onChange={(e) => setSelectedQuestion({ ...selectedQuestion, text: e.target.value })}
+                  onChange={(e) =>
+                    setSelectedQuestion({
+                      ...selectedQuestion,
+                      text: e.target.value,
+                    })
+                  }
                 />
               </div>
               <div className="grid gap-2">
@@ -467,10 +511,16 @@ export default function QuestionPage() {
                 <Select
                   value={selectedQuestion.type}
                   onValueChange={(value) => {
-                    const updatedQuestion = { ...selectedQuestion, type: value as QuestionType };
+                    const updatedQuestion = {
+                      ...selectedQuestion,
+                      type: value as QuestionType,
+                    };
                     if (value === QuestionType.TRUE_FALSE) {
                       updatedQuestion.options = ["True", "False"];
-                    } else if (value === QuestionType.MULTIPLE_CHOICE && updatedQuestion.options.length < 2) {
+                    } else if (
+                      value === QuestionType.MULTIPLE_CHOICE &&
+                      updatedQuestion.options.length < 2
+                    ) {
                       updatedQuestion.options = ["", "", "", ""];
                     }
                     setSelectedQuestion(updatedQuestion);
@@ -480,8 +530,12 @@ export default function QuestionPage() {
                     <SelectValue placeholder="Sélectionner le type" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value={QuestionType.MULTIPLE_CHOICE}>Choix multiple</SelectItem>
-                    <SelectItem value={QuestionType.TRUE_FALSE}>Vrai / Faux</SelectItem>
+                    <SelectItem value={QuestionType.MULTIPLE_CHOICE}>
+                      Choix multiple
+                    </SelectItem>
+                    <SelectItem value={QuestionType.TRUE_FALSE}>
+                      Vrai / Faux
+                    </SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -496,7 +550,10 @@ export default function QuestionPage() {
                       onChange={(e) => {
                         const newOptions = [...selectedQuestion.options];
                         newOptions[index] = e.target.value;
-                        setSelectedQuestion({ ...selectedQuestion, options: newOptions });
+                        setSelectedQuestion({
+                          ...selectedQuestion,
+                          options: newOptions,
+                        });
                       }}
                       placeholder={`Option ${index + 1}`}
                     />
@@ -509,14 +566,22 @@ export default function QuestionPage() {
                 {selectedQuestion.type === QuestionType.MULTIPLE_CHOICE ? (
                   <Select
                     value={selectedQuestion.correctAnswer}
-                    onValueChange={(value) => setSelectedQuestion({ ...selectedQuestion, correctAnswer: value })}
+                    onValueChange={(value) =>
+                      setSelectedQuestion({
+                        ...selectedQuestion,
+                        correctAnswer: value,
+                      })
+                    }
                   >
                     <SelectTrigger id="edit-correctAnswer">
                       <SelectValue placeholder="Sélectionner la réponse correcte" />
                     </SelectTrigger>
                     <SelectContent>
                       {selectedQuestion.options.map((option, index) => (
-                        <SelectItem key={index} value={option || `option_${index + 1}`}>
+                        <SelectItem
+                          key={index}
+                          value={option || `option_${index + 1}`}
+                        >
                           {option || `Option ${index + 1}`}
                         </SelectItem>
                       ))}
@@ -525,7 +590,12 @@ export default function QuestionPage() {
                 ) : (
                   <Select
                     value={selectedQuestion.correctAnswer}
-                    onValueChange={(value) => setSelectedQuestion({ ...selectedQuestion, correctAnswer: value })}
+                    onValueChange={(value) =>
+                      setSelectedQuestion({
+                        ...selectedQuestion,
+                        correctAnswer: value,
+                      })
+                    }
                   >
                     <SelectTrigger id="edit-correctAnswer">
                       <SelectValue placeholder="Sélectionner la réponse correcte" />
@@ -542,7 +612,9 @@ export default function QuestionPage() {
                 <Label htmlFor="edit-quiz">Quiz</Label>
                 <Select
                   value={selectedQuestion.quizId}
-                  onValueChange={(value) => setSelectedQuestion({ ...selectedQuestion, quizId: value })}
+                  onValueChange={(value) =>
+                    setSelectedQuestion({ ...selectedQuestion, quizId: value })
+                  }
                 >
                   <SelectTrigger id="edit-quiz">
                     <SelectValue placeholder="Sélectionner un quiz" />
@@ -563,7 +635,12 @@ export default function QuestionPage() {
                   id="edit-points"
                   type="number"
                   value={selectedQuestion.points}
-                  onChange={(e) => setSelectedQuestion({ ...selectedQuestion, points: parseInt(e.target.value) || 1 })}
+                  onChange={(e) =>
+                    setSelectedQuestion({
+                      ...selectedQuestion,
+                      points: parseInt(e.target.value) || 1,
+                    })
+                  }
                 />
               </div>
             </div>
@@ -584,7 +661,10 @@ export default function QuestionPage() {
             <DialogTitle>Confirmer la suppression</DialogTitle>
           </DialogHeader>
           <div className="py-4">
-            <p>Êtes-vous sûr de vouloir supprimer cette question ? Cette action ne peut pas être annulée.</p>
+            <p>
+              Êtes-vous sûr de vouloir supprimer cette question ? Cette action
+              ne peut pas être annulée.
+            </p>
           </div>
           <div className="flex justify-end space-x-2">
             <Button variant="outline" onClick={() => setIsDeleting(false)}>
@@ -606,10 +686,7 @@ export default function QuestionPage() {
           <div className="grid gap-4 py-4">
             <div className="grid gap-2">
               <Label htmlFor="quiz-bulk">Quiz</Label>
-              <Select
-                value={selectedQuizId}
-                onValueChange={setSelectedQuizId}
-              >
+              <Select value={selectedQuizId} onValueChange={setSelectedQuizId}>
                 <SelectTrigger id="quiz-bulk">
                   <SelectValue placeholder="Sélectionner un quiz" />
                 </SelectTrigger>
@@ -641,27 +718,32 @@ export default function QuestionPage() {
 
             {importType === "text" ? (
               <div className="grid gap-2">
-                <Label htmlFor="bulk-questions">Questions (format: texte de la question, type, options, réponse correcte)</Label>
+                <Label htmlFor="bulk-questions">
+                  Questions (format: texte de la question, type, options,
+                  réponse correcte)
+                </Label>
                 <Textarea
                   id="bulk-questions"
                   value={bulkQuestions}
                   onChange={(e) => setBulkQuestions(e.target.value)}
                   className="h-64"
                   placeholder={`Quelle est la capitale de la France?
-MULTIPLE_CHOICE
-Paris
-Lyon
-Marseille
-Nice
-Correct: Paris
+                    MULTIPLE_CHOICE
+                    Paris
+                    Lyon
+                    Marseille
+                    Nice
+                    Correct: Paris
 
-La Terre est plate.
-TRUE_FALSE
-Correct: False`}
+                    La Terre est plate.
+                    TRUE_FALSE
+                    Correct: False`}
                 />
                 <p className="text-sm text-gray-500">
-                  Séparez chaque question par une ligne vide. Pour les questions à choix multiple, listez chaque option sur une ligne distincte.
-                  Indiquez la réponse correcte à la fin avec "Correct: ".
+                  Séparez chaque question par une ligne vide. Pour les questions
+                  à choix multiple, listez chaque option sur une ligne
+                  distincte. Indiquez la réponse correcte à la fin avec
+                  "Correct: ".
                 </p>
               </div>
             ) : (
@@ -674,14 +756,15 @@ Correct: False`}
                   onChange={handleJsonFileChange}
                 />
                 <p className="text-sm text-gray-500">
-                  Le fichier JSON doit contenir un tableau d'objets avec la structure suivante :
+                  Le fichier JSON doit contenir un tableau d'objets avec la
+                  structure suivante :
                   {`{
-  "text": "Question",
-  "type": "MULTIPLE_CHOICE" | "TRUE_FALSE",
-  "options": ["Option 1", "Option 2", ...],
-  "correctAnswer": "Réponse correcte",
-  "points": 1
-}`}
+                      "text": "Question",
+                      "type": "MULTIPLE_CHOICE" | "TRUE_FALSE",
+                      "options": ["Option 1", "Option 2", ...],
+                      "correctAnswer": "Réponse correcte",
+                      "points": 1
+                    }`}
                 </p>
               </div>
             )}
@@ -690,9 +773,12 @@ Correct: False`}
             <Button variant="outline" onClick={() => setBulkDialogOpen(false)}>
               Annuler
             </Button>
-            <Button 
-              onClick={handleSaveBulkQuestions} 
-              disabled={!selectedQuizId || (importType === "text" ? !bulkQuestions.trim() : !jsonFile)}
+            <Button
+              onClick={handleSaveBulkQuestions}
+              disabled={
+                !selectedQuizId ||
+                (importType === "text" ? !bulkQuestions.trim() : !jsonFile)
+              }
             >
               Importer
             </Button>

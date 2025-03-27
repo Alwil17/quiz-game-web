@@ -1,0 +1,3239 @@
+[
+    {
+        "name": "Mathematics",
+        "description": "Quiz sur les mathématiques",
+        "quizzes": [
+            {
+                "title": "Algebra",
+                "difficulty": "medium",
+                "questions": [
+                    {
+                        "text": "Quel est le résultat de 2x + 3 = 7 ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "x = 2",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "x = 1",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "x = 3",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "x = 4",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Si f(x) = 3x + 5, quelle est f(2) ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "11",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "9",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "7",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "8",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quelle est la forme canonique de l'équation (x - 2)^2 = 9 ?",
+                        "type": "MCQ",
+                        "level": "hard",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "x^2 - 4x + 4 = 9",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 2,
+                                "text": "x^2 - 4x + 13 = 9",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "x^2 - 4x - 5 = 0",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 4,
+                                "text": "x^2 + 4x - 5 = 0",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Qu'est-ce que le discriminant dans une équation quadratique ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Le terme constant",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 2,
+                                "text": "La somme des racines",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Le terme linéaire",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "b^2 - 4ac",
+                                "isCorrect": true
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Résoudre x^2 + 6x + 9 = 0",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "x = -3",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "x = 3",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "x = -2",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "x = 2",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Simplifie l'expression : (x^2 - 9) / (x - 3)",
+                        "type": "MCQ",
+                        "level": "hard",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "x + 3",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "x - 3",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "x^2 - 3",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "x + 9",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quelle est la solution de l'équation 3x - 4 = 2x + 1 ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "x = 5",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 2,
+                                "text": "x = -5",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "x = 5/3",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 4,
+                                "text": "x = -5/3",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Que représente le coefficient directeur dans une équation linéaire ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Le point d'intersection",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 2,
+                                "text": "Le taux de croissance",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 3,
+                                "text": "La pente",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "La distance",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Si f(x) = x^3 - 3x^2 + 2x, quelle est la dérivée de f(x) ?",
+                        "type": "MCQ",
+                        "level": "hard",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "3x^2 - 6x + 2",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "3x^2 - 6x",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "x^3 - 6x",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "x^2 - 3x",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quelle est l'intégrale de 2x ?",
+                        "type": "MCQ",
+                        "level": "hard",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "x^2 + C",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "2x^2 + C",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "x^3 + C",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "2x + C",
+                                "isCorrect": false
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Science",
+        "description": "Quiz sur la science",
+        "quizzes": [
+            {
+                "title": "Physique",
+                "difficulty": "medium",
+                "questions": [
+                    {
+                        "text": "Quel est l'unité de la force ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Newton",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Joule",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Pascal",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Watt",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Qui a formulé la loi de la gravitation universelle ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Isaac Newton",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Albert Einstein",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Galileo Galilei",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Nikola Tesla",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quelle est la formule de la loi des gaz parfaits ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "PV = nRT",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "P = nRT",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "PV = T",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "P = V/T",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est le principe de la relativité restreinte ?",
+                        "type": "MCQ",
+                        "level": "hard",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "La vitesse de la lumière est constante",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Le temps s'écoule plus lentement à grande vitesse",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 3,
+                                "text": "La gravité peut être annulée",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "L'énergie est quantifiée",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est le principal gaz responsable du réchauffement climatique ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Dioxyde de carbone",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Oxygène",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Azote",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Argon",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est le principe de la thermodynamique ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "L'énergie ne peut pas être créée ni détruite",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "L'énergie est toujours dissociée",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "L'énergie se perd toujours",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "L'énergie est limitée",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est le principe de l'effet photoélectrique ?",
+                        "type": "MCQ",
+                        "level": "hard",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "L'émission d'électrons par un matériau sous l'effet de la lumière",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "La production de lumière par un matériau",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "La propagation des ondes lumineuses",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "La conversion de la lumière en chaleur",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est l'effet Doppler ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Le changement de fréquence d'une onde en fonction du mouvement de la source ou de l'observateur",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "L'augmentation de la vitesse d'une onde",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "La disparition des ondes",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "L'absorption des ondes",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est le principe de la conservation de la quantité de mouvement ?",
+                        "type": "MCQ",
+                        "level": "hard",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "La quantité de mouvement reste constante dans un système isolé",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "La quantité de mouvement augmente dans un système isolé",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "La quantité de mouvement se dissipe",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "La quantité de mouvement peut être créée",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Qu'est-ce que l'entropie ?",
+                        "type": "MCQ",
+                        "level": "hard",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "La mesure du désordre dans un système",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "L'énergie contenue dans un système",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Le mouvement des particules",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "La pression exercée par un gaz",
+                                "isCorrect": false
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Quiz Général",
+        "description": "Un ensemble de quiz sur différents sujets.",
+        "quizzes": [
+            {
+                "title": "Film",
+                "difficulty": "medium",
+                "questions": [
+                    {
+                        "text": "Qui a réalisé le film 'Inception' ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Christopher Nolan",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Steven Spielberg",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Martin Scorsese",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "James Cameron",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel film a remporté l'Oscar du meilleur film en 1994 ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Forrest Gump",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "The Shawshank Redemption",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Pulp Fiction",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "The Lion King",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Qui interprète le rôle principal dans le film 'Gladiator' ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Russell Crowe",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Brad Pitt",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Tom Cruise",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Matt Damon",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est le film le plus rentable de tous les temps (2023) ?",
+                        "type": "MCQ",
+                        "level": "hard",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Avatar: The Way of Water",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Avengers: Endgame",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Star Wars: The Force Awakens",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Jurassic World",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Qui a écrit le scénario du film 'Pulp Fiction' ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Quentin Tarantino",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Martin Scorsese",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Steven Spielberg",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Ridley Scott",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est le nom du vaisseau dans le film 'Star Wars' ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Millennium Falcon",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Enterprise",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "TARDIS",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Discovery",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Qui a joué le rôle de Jack Dawson dans Titanic ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Leonardo DiCaprio",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Johnny Depp",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Matt Damon",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Brad Pitt",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est le nom du réalisateur de 'The Dark Knight' ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Christopher Nolan",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Joss Whedon",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Sam Raimi",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "David Fincher",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "En quelle année 'The Godfather' a-t-il été publié ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "1972",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "1980",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "1965",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "1990",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est le nom du personnage joué par Keanu Reeves dans 'The Matrix' ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Neo",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Morpheus",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Trinity",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Smith",
+                                "isCorrect": false
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Littérature",
+                "difficulty": "medium",
+                "questions": [
+                    {
+                        "text": "Qui a écrit 'Les Misérables' ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Victor Hugo",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Émile Zola",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Gustave Flaubert",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Molière",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel roman de George Orwell décrit une société totalitaire ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "1984",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Animal Farm",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Brave New World",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Fahrenheit 451",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est le nom du protagoniste de 'Don Quichotte' ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Don Quichotte",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Sancho Panza",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Alonso Quijano",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Carlos V",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel auteur a écrit 'L'Alchimiste' ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Paulo Coelho",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Gabriel García Márquez",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Isabel Allende",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Mario Vargas Llosa",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Dans quel livre peut-on lire l'histoire de Sherlock Holmes ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Les Aventures de Sherlock Holmes",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Dracula",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Le Seigneur des Anneaux",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "La Peste",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Qui a écrit 'Le Petit Prince' ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Antoine de Saint-Exupéry",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Albert Camus",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Marcel Proust",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "François Rabelais",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Qui a écrit 'À la recherche du temps perdu' ?",
+                        "type": "MCQ",
+                        "level": "hard",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Marcel Proust",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Flaubert",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Zola",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Hugo",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Dans quel pays l'histoire de 'Don Quichotte' se déroule-t-elle ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Espagne",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "France",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Italie",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Portugal",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel auteur est connu pour ses 'Fables' ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Jean de La Fontaine",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Racine",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Molière",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Voltaire",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Qui a écrit 'Les Fleurs du mal' ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Charles Baudelaire",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Victor Hugo",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Paul Verlaine",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Arthur Rimbaud",
+                                "isCorrect": false
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Culture sur les animaux",
+        "description": "Un ensemble de quiz pour tester vos connaissances sur les animaux.",
+        "quizzes": [
+            {
+                "title": "Animaux terrestres",
+                "difficulty": "medium",
+                "questions": [
+                    {
+                        "text": "Quel est l'animal terrestre le plus rapide ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Guépard",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Lion",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Antilope",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Eléphant",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Combien de pattes a une araignée ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Huit",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Six",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Quatre",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Dix",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est l'animal terrestre le plus lourd ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Éléphant d'Afrique",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Bison",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Gorille",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Hippopotame",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est le plus grand prédateur terrestre ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Ours polaire",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Lion",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Tigre",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Crocodile",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel animal a une poche ventrale pour porter ses petits ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Kangourou",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Lion",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Giraffe",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Serpent",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est l'animal le plus intelligent ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Dauphin",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Chimpanzé",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Éléphant",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Pieuvre",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est l'animal national de l'Australie ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Kangourou",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Koala",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Emu",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Crocodile",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est le plus grand reptile vivant ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Crocodile du Nil",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Python réticulé",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Anaconda",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Iguane",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est le nom du plus petit chien du monde ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Chihuahua",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Pomeranian",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Dachshund",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Bulldog",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est le plus grand marsupial vivant ?",
+                        "type": "MCQ",
+                        "level": "hard",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Kangourou géant",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Koala",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Wombat",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Wallaby",
+                                "isCorrect": false
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Animaux marins",
+                "difficulty": "medium",
+                "questions": [
+                    {
+                        "text": "Quel est le plus grand mammifère marin ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Baleine bleue",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Orque",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Dauphin",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Morse",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quelle est la vitesse maximale d'un dauphin ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "64 km/h",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "40 km/h",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "100 km/h",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "80 km/h",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est le nom du poisson capable de produire de l'électricité ?",
+                        "type": "MCQ",
+                        "level": "hard",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Poisson électrique",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Anguille électrique",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Poisson-lanterne",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Raie manta",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est le plus grand requin connu ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Requin-baleine",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Grand requin blanc",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Requin-marteau",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Requin-tigre",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel animal marin est connu pour ses tentacules ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Pieuvre",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Méduse",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Raie",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Poisson-globe",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est l'animal marin capable de changer de couleur ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Chauve-souris",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 2,
+                                "text": "Pieuvre",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 3,
+                                "text": "Raie manta",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Requin",
+                                "isCorrect": false
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Sport MBA",
+        "description": "Un ensemble de quiz pour tester vos connaissances sur le sport, avec un focus sur les aspects de gestion et de stratégie dans les sports.",
+        "quizzes": [
+            {
+                "title": "Gestion d'équipes sportives",
+                "difficulty": "medium",
+                "questions": [
+                    {
+                        "text": "Quel est l'objectif principal d'un directeur sportif dans une équipe professionnelle ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Gérer les contrats des joueurs",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Diriger les entraînements",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Faire la publicité de l'équipe",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Surveiller les finances de l'équipe",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Qu'est-ce qu'une analyse SWOT dans la gestion sportive ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Une analyse des forces, faiblesses, opportunités et menaces",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Une analyse des performances physiques des athlètes",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Une analyse des tendances du marché",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Une analyse des résultats de l'équipe",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est l'impact principal d'une mauvaise gestion financière dans un club sportif ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Une baisse de la performance de l'équipe",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Une augmentation des salaires des joueurs",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "La réduction des matchs dans la saison",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "L'amélioration des installations d'entraînement",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est le rôle principal d'un agent sportif ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Négocier les contrats des joueurs",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Former les joueurs",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Organiser des matchs",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Gérer l'image des joueurs",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Qu'est-ce qu'un partenariat sponsor dans le cadre d'une équipe sportive ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Un accord commercial entre une équipe et une marque",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Une alliance stratégique pour améliorer les performances",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Un contrat entre un joueur et un entraîneur",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Un programme de formation des jeunes talents",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est le concept de 'recrutement de talents' dans le sport professionnel ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Identifier et attirer les meilleurs joueurs disponibles",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Former des équipes de jeunes joueurs",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Engager des entraîneurs expérimentés",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Recruter des analystes de performance",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est le rôle principal d'un coach sportif dans la gestion d'une équipe ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Diriger les entraînements et les tactiques",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Gérer les finances de l'équipe",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Analyser les performances des spectateurs",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Gérer les partenariats commerciaux",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Comment une équipe peut-elle augmenter sa rentabilité ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "En améliorant ses performances pour attirer plus de spectateurs",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "En augmentant les salaires des joueurs",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "En réduisant les frais de déplacement",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "En augmentant les prix des billets",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est l'objectif d'une analyse de la concurrence dans le domaine sportif ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Identifier les forces et faiblesses des autres équipes",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Augmenter le nombre de sponsors",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Réduire les coûts des matchs",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Améliorer la formation des jeunes joueurs",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Qu'est-ce qu'une stratégie de marketing sportif ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Un plan pour promouvoir une équipe et ses événements",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Une stratégie pour améliorer la performance de l'équipe",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Un programme de fidélisation des joueurs",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Un plan pour améliorer les installations d'entraînement",
+                                "isCorrect": false
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Stratégies sportives avancées",
+                "difficulty": "hard",
+                "questions": [
+                    {
+                        "text": "Quel est le rôle des données et statistiques dans la stratégie sportive moderne ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Analyser et améliorer les performances des joueurs",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Prévoir le nombre de spectateurs",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Fixer les prix des billets",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Choisir les partenaires commerciaux",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est l'objectif principal d'une stratégie de marketing numérique pour une équipe sportive ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Augmenter la visibilité en ligne et l'engagement des fans",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Vendre plus de billets",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Réduire les coûts de fonctionnement",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Améliorer les conditions d'entraînement",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Qu'est-ce qu'une stratégie de pricing dans le sport ?",
+                        "type": "MCQ",
+                        "level": "hard",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "La fixation des prix des billets et des produits dérivés",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Le choix des horaires de match",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "La création d'une image de marque",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "La gestion des relations publiques",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quelle est l'importance de la gestion de crise dans le sport professionnel ?",
+                        "type": "MCQ",
+                        "level": "hard",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Maintenir l'image de l'équipe et éviter des pertes financières importantes",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Réduire les coûts d'entraînement",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Promouvoir l'équipe à l'international",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Augmenter le salaire des joueurs",
+                                "isCorrect": false
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Football Américain",
+        "description": "Un ensemble de quiz pour tester vos connaissances sur le football américain, son histoire, ses règles, et ses stratégies.",
+        "quizzes": [
+            {
+                "title": "Les Règles du Football Américain",
+                "difficulty": "medium",
+                "questions": [
+                    {
+                        "text": "Combien de yards faut-il parcourir pour obtenir un nouveau premier essai dans le football américain ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "10 yards",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "15 yards",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "20 yards",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "5 yards",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Combien de temps dure un match de football américain ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "4 quarts-temps de 15 minutes",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "2 mi-temps de 30 minutes",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "2 quarts-temps de 20 minutes",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "3 périodes de 20 minutes",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est le nom du trophée décerné au champion du Super Bowl ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Trophée Vince Lombardi",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Trophée Joe Montana",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Trophée Tom Brady",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Trophée Peyton Manning",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Combien de joueurs composent une équipe de football américain sur le terrain ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "11 joueurs",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "7 joueurs",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "9 joueurs",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "12 joueurs",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est le but principal d'un quarterback dans une équipe de football américain ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Lancer le ballon et diriger l'attaque",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Plaquer l'adversaire",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Protéger la ligne offensive",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Marquer des touchdowns",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quelle est la distance d'un field goal ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Entre 17 et 58 yards",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Entre 10 et 40 yards",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Entre 5 et 25 yards",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Entre 20 et 50 yards",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est le nom de la zone dans laquelle un joueur marque un touchdown ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "La zone des buts",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 2,
+                                "text": "La zone d'en-but",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 3,
+                                "text": "La zone de la ligne de touche",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "La zone des 50 yards",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Que signifie l'expression '4e tentative' dans un match de football américain ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Dernière tentative avant de rendre la balle à l'équipe adverse",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Une tentative supplémentaire pour marquer un touchdown",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Une tentative qui permet de marquer un field goal",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Une tentative pour avancer de 20 yards",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Combien de points vaut un touchdown ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "6 points",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "3 points",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "7 points",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "4 points",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Que signifie l'expression 'sack' dans le football américain ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Plaquer le quarterback derrière la ligne de mêlée",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Marquer un touchdown",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Effectuer un placage sur un joueur avec le ballon",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Faire une passe à un coéquipier",
+                                "isCorrect": false
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Les Grandes Équipes de Football Américain",
+                "difficulty": "hard",
+                "questions": [
+                    {
+                        "text": "Qui a remporté le plus grand nombre de Super Bowls ?",
+                        "type": "MCQ",
+                        "level": "hard",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Pittsburgh Steelers",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Dallas Cowboys",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "New England Patriots",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "San Francisco 49ers",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est le nom de l'équipe avec laquelle Tom Brady a remporté 6 Super Bowls ?",
+                        "type": "MCQ",
+                        "level": "hard",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "New England Patriots",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Tampa Bay Buccaneers",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Green Bay Packers",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Miami Dolphins",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est l'équipe de football américain avec le plus grand nombre de titres de conférence NFC ?",
+                        "type": "MCQ",
+                        "level": "hard",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Dallas Cowboys",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "San Francisco 49ers",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Chicago Bears",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Minnesota Vikings",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "En quelle année les Green Bay Packers ont-ils remporté leur premier Super Bowl ?",
+                        "type": "MCQ",
+                        "level": "hard",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "1967",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "1972",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "1955",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "1969",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Qui détient le record du plus grand nombre de touchdowns en une saison NFL ?",
+                        "type": "MCQ",
+                        "level": "hard",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "LaDainian Tomlinson",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Jerry Rice",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Emmitt Smith",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Peyton Manning",
+                                "isCorrect": false
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Trophée",
+        "description": "Testez vos connaissances sur les trophées les plus célèbres à travers le monde, de ceux du sport à ceux de la culture.",
+        "quizzes": [
+            {
+                "title": "Trophées Sportifs",
+                "difficulty": "medium",
+                "questions": [
+                    {
+                        "text": "Quel trophée est décerné au champion du monde de football ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "La Coupe du Monde",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Le Ballon d'Or",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "La Coupe d'Europe",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "La Coupe des Confédérations",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel trophée est remis au champion de la NFL chaque année ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Le Vince Lombardi Trophy",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Le Stanley Cup",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Le Larry O'Brien Trophy",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Le Heisman Trophy",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel trophée est remis au champion du Tour de France ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Le Maillot Jaune",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Le Maillot Vert",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Le Trophée du Tour",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "La Coupe de la Paix",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est le nom du trophée attribué au champion du tennis à Wimbledon ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Le trophée du All England Club",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "La Coupe Davis",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Le Trophée de Roland-Garros",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "La Coupe du Monde de Tennis",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel trophée est décerné au meilleur joueur de la saison de la NBA ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Le MVP (Most Valuable Player)",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Le Larry O'Brien Trophy",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Le Bill Russell Finals MVP Award",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Le NBA Championship Trophy",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel trophée est décerné au meilleur joueur du Championnat du Monde de football féminin ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Le Soulier d'Or",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 2,
+                                "text": "Le Trophée Adidas Golden Boot",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Le Ballon d'Or Féminin",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 4,
+                                "text": "Le Trophée du Meilleur Joueur de la FIFA",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel trophée est attribué au champion du golf majeur, le Masters ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Le Trophée du Masters",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "La Coupe de l'US Open",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "La Coupe Ryder",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "La Coupe du Monde de Golf",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel trophée est décerné chaque année au champion du monde de Formule 1 ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Le Trophée des Champions",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 2,
+                                "text": "Le Trophée du Circuit",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Le Trophée du Champion du Monde",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 4,
+                                "text": "Le Trophée de la Pole Position",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel trophée est attribué au vainqueur du tournoi de tennis US Open ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Le Trophée des US Open",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Le Grand Prix du Tennis",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "La Coupe de Wimbledon",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "La Coupe du Monde de Tennis",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel trophée est attribué au champion du monde de boxe ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Le Trophée des Championnats du Monde",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 2,
+                                "text": "Le Ceinture de Champion",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 3,
+                                "text": "La Coupe du Boxeur de l'Année",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Le Trophée de la Gloire",
+                                "isCorrect": false
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Trophées Culturels",
+                "difficulty": "hard",
+                "questions": [
+                    {
+                        "text": "Quel trophée est attribué chaque année au meilleur film lors des Oscars ?",
+                        "type": "MCQ",
+                        "level": "hard",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "L'Oscar du Meilleur Film",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "La Palme d'Or",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Le Golden Globe",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Le César du Meilleur Film",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel trophée est décerné au meilleur écrivain lors des prix littéraires français ?",
+                        "type": "MCQ",
+                        "level": "hard",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Le Prix Goncourt",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Le Prix Renaudot",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Le Prix Fémina",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Le Prix Médicis",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est le trophée attribué au meilleur joueur de football américain en NCAA ?",
+                        "type": "MCQ",
+                        "level": "hard",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Le Heisman Trophy",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Le Trophée Vince Lombardi",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Le MVP du College Football",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Le Trophée Walter Camp",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel trophée est remis au meilleur joueur du championnat de la NBA ?",
+                        "type": "MCQ",
+                        "level": "hard",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Le Larry O'Brien Trophy",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Le MVP de la saison",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Le NBA Finals MVP Award",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Le Trophée Bill Russell",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel trophée est attribué au meilleur film de l'année aux Golden Globe Awards ?",
+                        "type": "MCQ",
+                        "level": "hard",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Le Golden Globe du Meilleur Film",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "L'Oscar du Meilleur Film",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "La Palme d'Or",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Le Trophée du Meilleur Film",
+                                "isCorrect": false
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Culture Africaine",
+        "description": "Testez vos connaissances sur la culture, l'histoire, et les personnalités importantes de l'Afrique.",
+        "quizzes": [
+            {
+                "title": "Histoire et Personnalités Africaines",
+                "difficulty": "medium",
+                "questions": [
+                    {
+                        "text": "Quel pays a été dirigé par Nelson Mandela après la fin de l'apartheid ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Afrique du Sud",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Kenya",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Nigeria",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Zambie",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel roi du Royaume du Mali est célèbre pour sa richesse et son pèlerinage à La Mecque ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Mansa Musa",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Sundiata Keïta",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Shaka Zulu",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Kwame Nkrumah",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel célèbre leader panafricaniste a fondé l'Organisation de l'Unité Africaine (OUA) ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Kwame Nkrumah",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Julius Nyerere",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Patrice Lumumba",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Haile Selassie",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quelle est la capitale du Sénégal ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Dakar",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Abidjan",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Lagos",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Accra",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "En quelle année la conférence de Berlin, qui a tracé les frontières de l'Afrique, a-t-elle eu lieu ?",
+                        "type": "MCQ",
+                        "level": "hard",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "1884-1885",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "1900-1901",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "1750-1751",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "1910-1911",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est le nom du célèbre poète et homme politique nigérian qui a écrit 'Things Fall Apart' ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Chinua Achebe",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Wole Soyinka",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Ngũgĩ wa Thiong'o",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Ben Okri",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est le nom du désert qui couvre une grande partie du nord de l'Afrique ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Sahara",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Kalahari",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Namib",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Sonoran",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est le plus grand lac d'Afrique ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Lac Victoria",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Lac Tanganyika",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Lac Malawi",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Lac Tchad",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Dans quel pays se trouve le site historique de la pyramide de Gizeh ?",
+                        "type": "MCQ",
+                        "level": "easy",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Egypte",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Soudan",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Tunisie",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Algérie",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Qui est le premier président noir de l'Afrique du Sud ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Nelson Mandela",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Thabo Mbeki",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Jacob Zuma",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "F.W. de Klerk",
+                                "isCorrect": false
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "title": "Culture et Traditions Africaines",
+                "difficulty": "hard",
+                "questions": [
+                    {
+                        "text": "Quelle est la langue la plus parlée en Afrique ?",
+                        "type": "MCQ",
+                        "level": "hard",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "L'arabe",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Le swahili",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "L'anglais",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Le français",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est le nom de la danse traditionnelle pratiquée par les Zoulous ?",
+                        "type": "MCQ",
+                        "level": "hard",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Indlamu",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Sabar",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Adumu",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Gumbe",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est le tissu traditionnel des peuples yoruba d'Afrique de l'Ouest ?",
+                        "type": "MCQ",
+                        "level": "hard",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Aso-oke",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Kente",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Shweshwe",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Bogolanfini",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est le nom de la fête traditionnelle célébrée par les Maasai pour marquer l'âge adulte ?",
+                        "type": "MCQ",
+                        "level": "hard",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Enkipaata",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Olng'esherr",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Bomas",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Linyama",
+                                "isCorrect": false
+                            }
+                        ]
+                    },
+                    {
+                        "text": "Quel est le nom du célèbre festival de musique en Afrique du Sud, reconnu pour sa promotion de la musique traditionnelle et moderne ?",
+                        "type": "MCQ",
+                        "level": "medium",
+                        "answers": [
+                            {
+                                "id": 1,
+                                "text": "Cape Town International Jazz Festival",
+                                "isCorrect": true
+                            },
+                            {
+                                "id": 2,
+                                "text": "Fête de la Musique",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 3,
+                                "text": "Festival des Arts d'Abidjan",
+                                "isCorrect": false
+                            },
+                            {
+                                "id": 4,
+                                "text": "Festival de Jazz de Lagos",
+                                "isCorrect": false
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
